@@ -47,4 +47,9 @@
         android:id="@+id/settingsFragment"
         android:name="org.udg.pds.todoandroid.fragment.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/crearPostFragment"
+        android:name="org.udg.pds.todoandroid.fragment.CrearPostFragment"
+        android:label="fragment_crear_post"
+        tools:layout="@layout/fragment_crear_post" />
 </navigation>
