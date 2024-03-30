@@ -8,6 +8,12 @@
             android:title="@string/text_home"
             app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/crearPostFragment"
+        android:enabled="true"
+        android:icon="@drawable/agregar"
+        android:title="@string/crear_post"
+        app:showAsAction="ifRoom" />
+    <item
             android:id="@+id/action_image"
             android:checked="true"
             android:enabled="true"
