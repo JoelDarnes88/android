@@ -44,5 +44,11 @@ public interface TodoApi {
 
     @POST("/posts/post")
     Call<ResponseBody> addPost(@Body Post post);
+
+    @GET("/posts")
+    Call<List<Post>> getPosts();
+
+    @GET("/posts/me")
+    Call<List<Post>> getMeusPosts();
 }
 
