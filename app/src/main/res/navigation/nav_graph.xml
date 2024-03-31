@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/action_home">
+    app:startDestination="@id/homePostsFragment">
 
     <fragment
         android:id="@+id/action_home"
@@ -52,4 +52,9 @@
         android:name="org.udg.pds.todoandroid.fragment.CrearPostFragment"
         android:label="fragment_crear_post"
         tools:layout="@layout/fragment_crear_post" />
+    <fragment
+        android:id="@+id/homePostsFragment"
+        android:name="org.udg.pds.todoandroid.fragment.HomePostsFragment"
+        android:label="fragment_home_posts"
+        tools:layout="@layout/fragment_home_posts" />
 </navigation>

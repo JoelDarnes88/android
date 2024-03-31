@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/action_home"
+            android:id="@+id/homePostsFragment"
             android:enabled="true"
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/text_home"
