@@ -1,5 +1,6 @@
 package org.udg.pds.todoandroid.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
+import org.udg.pds.todoandroid.activity.PostDetallHomeActivity;
 import org.udg.pds.todoandroid.databinding.FragmentHomePostsBinding;
 import org.udg.pds.todoandroid.entity.Post;
 import org.udg.pds.todoandroid.rest.TodoApi;
@@ -138,13 +140,22 @@ public class HomePostsFragment extends Fragment {
             holder.preu.setText(String.valueOf(list.get(position).preu));
             holder.descripcio.setText(list.get(position).descripcio);
 
+            Post post = list.get(position);
+
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int duration = Toast.LENGTH_LONG;
+                    //int duration = Toast.LENGTH_LONG;
+                    //Toast toast = Toast.makeText(context, String.format("Post numero: %1d", holder.getBindingAdapterPosition()), duration);
+                    //toast.show();
 
-                    Toast toast = Toast.makeText(context, String.format("Post numero: %1d", holder.getBindingAdapterPosition()), duration);
-                    toast.show();
+                    String postId = String.valueOf(post.getId());
+                    Intent intent = new Intent(context, PostDetallHomeActivity.class);
+                    intent.putExtra("POST_ID", postId);
+                    if (!(context instanceof Activity)) {
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    }
+                    context.startActivity(intent);
                 }
             });
 
@@ -152,7 +163,6 @@ public class HomePostsFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     int duration = Toast.LENGTH_LONG;
-
                     Toast toast = Toast.makeText(context, holder.titol.getText(), duration);
                     toast.show();
                 }
