@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,13 +39,20 @@ public class HomePostsFragment extends Fragment {
     RecyclerView recyclerView;
     private PostsAdapter adapter;
     FragmentHomePostsBinding binding;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        binding = FragmentHomePostsBinding.inflate(inflater);
+        binding = FragmentHomePostsBinding.inflate(inflater, container, false);
+        binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updatePostList();
+            }
+        });
         return binding.getRoot();
 
     }
@@ -95,6 +103,11 @@ public class HomePostsFragment extends Fragment {
 
             }
         });
+
+        if (binding.swipeRefreshLayout.isRefreshing()) {
+            binding.swipeRefreshLayout.setRefreshing(false);
+        }
+
     }
 
     static class PostsViewHolder extends RecyclerView.ViewHolder {
