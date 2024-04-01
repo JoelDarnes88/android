@@ -50,5 +50,8 @@ public interface TodoApi {
 
     @GET("/posts/me")
     Call<List<Post>> getMeusPosts();
+
+    @GET("/posts/{id}")
+    Call<Post> getPostId(@Path("id") String id);
 }
 
