@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/homePostsFragment"
-            android:enabled="true"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/text_home"
-            app:showAsAction="ifRoom" />
+        android:id="@+id/homePostsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/text_home"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/crearPostFragment"
         android:enabled="true"
@@ -14,16 +14,16 @@
         android:title="@string/crear_post"
         app:showAsAction="ifRoom" />
     <item
-            android:id="@+id/action_image"
-            android:checked="true"
-            android:enabled="true"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/text_image"
-            app:showAsAction="ifRoom" />
+        android:id="@+id/action_image"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="@string/text_image"
+        app:showAsAction="ifRoom" />
     <item
-            android:id="@+id/action_tasks"
-            android:enabled="true"
-            android:icon="@drawable/ic_task_list_24dp"
-            android:title="@string/text_tasks"
-            app:showAsAction="ifRoom" />
+        android:id="@+id/action_profile"
+        android:enabled="true"
+        android:icon="@drawable/profile_logo"
+        android:title="@string/profile"
+        app:showAsAction="ifRoom" />
 </menu>

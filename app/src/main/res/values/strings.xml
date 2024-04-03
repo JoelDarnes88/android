@@ -30,4 +30,23 @@
     <string name="text_settings">This are the settings</string>
     <string name="crear_post">Crear post</string>
 
+    <string name="at_sign">\@</string>
+
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="default_name">Name</string>
+    <string name="default_username">\@username</string>
+    <string name="average_global_rating">Average global rating</string>
+    <string name="default_rating">5.0</string>
+    <string name="default_amount_ratings">(0)</string>
+    <string name="default_country">Country</string>
+    <string name="location">Location</string>
+    <string name="about_me">About me</string>
+    <string name="default_about_me_description">(No description added)</string>
+    <string name="my_services">My services</string>
+
+    <string name="placeholder1">General paintwork</string>
+    <string name="placeholder2">Placeholder description</string>
+    <string name="placeholder3">Service 1 average rating</string>
+
 </resources>

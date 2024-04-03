@@ -1,5 +1,6 @@
 package org.udg.pds.todoandroid.entity;
 
+import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -8,11 +9,46 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
     property = "id", scope = User.class)
-public class User {
+public class User implements Serializable {
     public Long id;
     public String username;
+    public String name;
+    public String country;
     public String email;
+    public String phoneNumber;
+    public String aboutMe;
+    public Double wallet;
 
-    public String getUsername () { return username; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Double getWallet() {
+        return wallet;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
 
 }
