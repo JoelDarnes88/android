@@ -17,17 +17,11 @@ public class LogOut {
         // Clear all cookies
         Log.d("LogOut", "Limpiando cookies...");
         cookieJar.clear();
-
-        // Clear any saved user session or preferences
         app.clearSharedPreferences();
 
-        // Redirect to Login Screen
+        // Redirect a Login
         Intent intent = new Intent(context, Login.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }
-
-    // Add this method in TodoApp class
-
-
 }
