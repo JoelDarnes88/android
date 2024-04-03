@@ -63,5 +63,5 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
 
     // NEW DEPENDENCIES HERE
-
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
