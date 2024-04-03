@@ -3,6 +3,8 @@ package org.udg.pds.todoandroid;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -28,6 +30,7 @@ public class TodoApp extends Application {
     public static final DateTimeFormatter AppDateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy - HH:mm:ss z");
 
     TodoApi mTodoService;
+    private ClearableCookieJar cookieJar;
 
     @Override
     public void onCreate() {
@@ -36,8 +39,7 @@ public class TodoApp extends Application {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        ClearableCookieJar cookieJar =
-            new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(this));
+        cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(this));
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
             .cookieJar(cookieJar)
@@ -57,6 +59,17 @@ public class TodoApp extends Application {
             .build();
 
         mTodoService = retrofit.create(TodoApi.class);
+    }
+
+    public ClearableCookieJar getCookieJar() {
+        return cookieJar;
+    }
+
+    public void clearSharedPreferences() {
+        SharedPreferences preferences = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
     }
 
     public TodoApi getAPI() {

@@ -11,11 +11,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
-import org.udg.pds.todoandroid.databinding.ContentFavoritesBinding;
 import org.udg.pds.todoandroid.databinding.ContentSettingsBinding;
+import org.udg.pds.todoandroid.activity.LogOut;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,14 +56,10 @@ public class SettingsFragment extends Fragment {
             Toast.makeText(getActivity(), "Cambios guardados", Toast.LENGTH_SHORT).show();
         });
 
-        binding.btnLogout.setOnClickListener(v -> {
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.clear();
-            editor.apply();
-
-            // Redireccionar al inicio de sesión.
-
+        binding.btnLogout.setOnClickListener(view -> {
+            new LogOut().performLogout(getActivity());
         });
+
 
         return binding.getRoot();
     }
