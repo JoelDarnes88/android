@@ -3,6 +3,7 @@ package org.udg.pds.todoandroid.rest;
 import org.udg.pds.todoandroid.entity.IdObject;
 import org.udg.pds.todoandroid.entity.Task;
 import org.udg.pds.todoandroid.entity.User;
+import org.udg.pds.todoandroid.entity.UserRegister;
 import org.udg.pds.todoandroid.entity.UserLogin;
 import org.udg.pds.todoandroid.entity.Post;
 
@@ -25,6 +26,9 @@ import retrofit2.http.Path;
 public interface TodoApi {
     @POST("/users/login")
     Call<User> login(@Body UserLogin login);
+
+    @POST("/users/register")
+    Call<User> register(@Body UserRegister register);
 
     @GET("/users/check")
     Call<String> check();

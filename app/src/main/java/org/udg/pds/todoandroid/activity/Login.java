@@ -55,6 +55,12 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        binding.registerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Login.this.startActivity(new Intent(Login.this, Register.class));
+            }
+        });
+
     }
 
     // This method is called when the "Login" button is pressed in the Login fragment

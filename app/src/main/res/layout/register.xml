@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -28,14 +27,13 @@
         android:layout_marginTop="16dp"
         android:textColor="#000000"/>
 
-
     <EditText
         android:layout_width="match_parent"
         android:layout_marginTop="16dp"
         android:hint="@string/username"
         android:drawablePadding="8dp"
         android:layout_height="wrap_content"
-        android:id="@+id/login_username"/>
+        android:id="@+id/register_username"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -43,17 +41,16 @@
         android:hint="@string/password"
         android:drawablePadding="8dp"
         android:layout_height="wrap_content"
-        android:id="@+id/login_password"
+        android:id="@+id/register_password"
         android:inputType="textPassword"/>
 
-    <Button
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@android:color/white"
-        android:text="@string/login"
-        android:id="@+id/login_button"
-        android:layout_gravity="left|center_vertical"/>
+        android:hint="Email"
+        android:drawablePadding="8dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_email"/>
 
     <Button
         android:layout_width="match_parent"
