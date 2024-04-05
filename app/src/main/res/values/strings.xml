@@ -8,6 +8,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="register">Register</string>
     <string name="add_task">Add Task</string>
     <string name="date_created">Date created:</string>
     <string name="task_text">Text:</string>
@@ -18,6 +19,7 @@
     <string name="text_home">Home</string>
     <string name="text_image">Image</string>
     <string name="text_tasks">Tasks</string>
+    <string name="text_post">Posts</string>
     <string name="title_activity_nd">NDActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
