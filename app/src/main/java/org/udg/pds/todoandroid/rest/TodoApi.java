@@ -14,6 +14,7 @@ import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -57,5 +58,8 @@ public interface TodoApi {
 
     @GET("/posts/{id}")
     Call<Post> getPostId(@Path("id") String id);
+
+    @DELETE("posts/{id}")
+    Call<Void> deletePost(@Path("id") String postId);
 }
 

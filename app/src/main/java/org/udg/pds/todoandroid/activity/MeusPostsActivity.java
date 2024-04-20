@@ -59,17 +59,27 @@ public class MeusPostsActivity extends AppCompatActivity {
         updatePostList();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePostList();
+    }
+
     public void updatePostList() {
         Call<List<Post>> call = mTodoService.getMeusPosts();
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {
-                    showPostsList(response.body());
+                    List<Post> posts = response.body();
+                    adapter.setPosts(posts);
                 } else {
-                    Toast.makeText(MeusPostsActivity.this, "Error llegint els posts", Toast.LENGTH_LONG).show();
+                    adapter.setPosts(new ArrayList<>());
+                    Toast.makeText(MeusPostsActivity.this, "No tens cap post", Toast.LENGTH_LONG).show();
                 }
+                adapter.notifyDataSetChanged();
             }
+
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
@@ -140,6 +150,7 @@ public class MeusPostsActivity extends AppCompatActivity {
             this.posts.addAll(newPosts);
             notifyDataSetChanged();
         }
+
 
         public void addAll(List<Post> newPosts) {
             int initialSize = posts.size();

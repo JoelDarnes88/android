@@ -3,6 +3,7 @@ package org.udg.pds.todoandroid.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,14 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
 
 
         this.crearMeuPost();
+
+
+        findViewById(R.id.boto_eliminar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletePost();
+            }
+        });
     }
 
 
@@ -64,6 +73,25 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
         preu.setText(String.format(Locale.getDefault(), "$%.2f", p.getPreu()));
     }
 
+    private void deletePost() {
+        String postId = getIntent().getStringExtra("POST_ID");
+        Call<Void> call = mApiService.deletePost(postId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(MeusPostsDetallActivity.this, "Post eliminat", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(MeusPostsDetallActivity.this, "Error al eliminar el post", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(MeusPostsDetallActivity.this, "Error:" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }
