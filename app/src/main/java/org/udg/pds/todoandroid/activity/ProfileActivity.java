@@ -1,7 +1,9 @@
 package org.udg.pds.todoandroid.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -36,5 +38,13 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if(!country.isEmpty()) countryTV.setText(country);
         if(!aboutMe.isEmpty()) aboutMeTV.setText(aboutMe);
+
+
+        //boto pels meus posts, obrir activity
+        Button openProfileButton = findViewById(R.id.boto_meus_posts);
+        openProfileButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, MeusPostsActivity.class);
+            startActivity(intent);
+        });
     }
 }

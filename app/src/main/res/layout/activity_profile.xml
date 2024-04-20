@@ -329,4 +329,13 @@
         app:layout_constraintEnd_toEndOf="@id/Service1_averageRating"
         app:layout_constraintTop_toBottomOf="@id/Service1_averageRatingStar"/>
 
+    <Button
+        android:id="@+id/boto_meus_posts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Meus Posts"
+        app:layout_constraintStart_toStartOf="@+id/Service1"
+        app:layout_constraintTop_toBottomOf="@+id/Service1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
