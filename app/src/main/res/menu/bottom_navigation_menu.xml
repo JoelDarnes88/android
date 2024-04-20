@@ -26,11 +26,4 @@
         android:icon="@drawable/profile_logo"
         android:title="@string/profile"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_post"
-        android:checked="true"
-        android:enabled="true"
-        android:icon="@drawable/ic_menu_post"
-        android:title="@string/text_post"
-        app:showAsAction="ifRoom"/>
 </menu>
