@@ -2,11 +2,12 @@ package org.udg.pds.todoandroid.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Intent;
+
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
 import org.udg.pds.todoandroid.entity.Post;
@@ -30,9 +31,6 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
         mApiService = ((TodoApp) this.getApplication()).getAPI();
 
 
-        this.crearMeuPost();
-
-
         findViewById(R.id.boto_eliminar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,11 +50,16 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
         this.carregarElsMeusPosts();
 
 
-
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_EDIT_POST && resultCode == RESULT_OK) {
+            carregarElsMeusPosts();
+        }
     }
 
-
-    private void crearMeuPost(){
+    private void carregarElsMeusPosts(){
 
         String postId = getIntent().getStringExtra("POST_ID");
         Call<Post> call = mApiService.getPostId(postId);
@@ -108,5 +111,6 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }
