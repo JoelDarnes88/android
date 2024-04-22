@@ -94,7 +94,7 @@ public class HomePostsFragment extends Fragment {
                 if (response.isSuccessful()) {
                     HomePostsFragment.this.showPostsList(response.body());
                 } else {
-                    Toast.makeText(HomePostsFragment.this.getContext(), "Ni hi ha cap post", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePostsFragment.this.getContext(), "No hi ha cap post", Toast.LENGTH_LONG).show();
                 }
             }
 

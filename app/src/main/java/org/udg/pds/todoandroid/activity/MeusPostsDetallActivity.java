@@ -2,6 +2,7 @@ package org.udg.pds.todoandroid.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import retrofit2.Response;
 public class MeusPostsDetallActivity extends AppCompatActivity {
 
     TodoApi mApiService;
+    private static final int REQUEST_EDIT_POST = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +31,35 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
         mApiService = ((TodoApp) this.getApplication()).getAPI();
 
 
-        this.crearMeuPost();
-
-
         findViewById(R.id.boto_eliminar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deletePost();
             }
         });
+
+        findViewById(R.id.boto_editar).setOnClickListener(new View.OnClickListener() {
+            String postId = getIntent().getStringExtra("POST_ID");
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MeusPostsDetallActivity.this, EditarPostActivity.class);
+                intent.putExtra("POST_ID", postId);
+                startActivityForResult(intent,REQUEST_EDIT_POST);
+            }
+        });
+        this.carregarElsMeusPosts();
+
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_EDIT_POST && resultCode == RESULT_OK) {
+            carregarElsMeusPosts();
+        }
     }
 
-
-    private void crearMeuPost(){
+    private void carregarElsMeusPosts(){
 
         String postId = getIntent().getStringExtra("POST_ID");
         Call<Post> call = mApiService.getPostId(postId);
@@ -93,5 +111,6 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }
