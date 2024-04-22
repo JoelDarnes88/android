@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.content.Intent;
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
 import org.udg.pds.todoandroid.entity.Post;
@@ -21,6 +21,7 @@ import retrofit2.Response;
 public class MeusPostsDetallActivity extends AppCompatActivity {
 
     TodoApi mApiService;
+    private static final int REQUEST_EDIT_POST = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,20 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
                 deletePost();
             }
         });
+
+        findViewById(R.id.boto_editar).setOnClickListener(new View.OnClickListener() {
+            String postId = getIntent().getStringExtra("POST_ID");
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MeusPostsDetallActivity.this, EditarPostActivity.class);
+                intent.putExtra("POST_ID", postId);
+                startActivityForResult(intent,REQUEST_EDIT_POST);
+            }
+        });
+        this.carregarElsMeusPosts();
+
+
+
     }
 
 

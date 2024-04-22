@@ -18,6 +18,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
@@ -61,5 +62,8 @@ public interface TodoApi {
 
     @DELETE("posts/{id}")
     Call<Void> deletePost(@Path("id") String postId);
+
+    @PUT("/posts/{id}")
+    Call<Void> updatePost(@Path("id") String postId, @Body Post post);
 }
 
