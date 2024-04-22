@@ -62,6 +62,7 @@ public class CrearPostFragment extends Fragment {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(getContext(), "Post creat correctament", Toast.LENGTH_LONG).show();
+                            clearFormFields(editTextTitle, editTextDescription, editTextPrice);
                         } else {
                             Toast.makeText(getContext(), "Error afegint el post", Toast.LENGTH_LONG).show();
                         }
@@ -77,5 +78,11 @@ public class CrearPostFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void clearFormFields(EditText editTextTitle, EditText editTextDescription, EditText editTextPrice) {
+        editTextTitle.setText("");
+        editTextDescription.setText("");
+        editTextPrice.setText("");
     }
 }
