@@ -7,13 +7,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import org.udg.pds.todoandroid.TodoApp;
 import org.udg.pds.todoandroid.databinding.ContentSettingsBinding;
 import org.udg.pds.todoandroid.activity.LogOut;
+import org.udg.pds.todoandroid.entity.Post;
+import org.udg.pds.todoandroid.entity.User;
+import org.udg.pds.todoandroid.entity.UserModify;
+import org.udg.pds.todoandroid.rest.TodoApi;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +32,7 @@ import org.udg.pds.todoandroid.activity.LogOut;
 public class SettingsFragment extends Fragment {
 
     private ContentSettingsBinding binding;
+    TodoApi mTodoService;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -45,9 +57,34 @@ public class SettingsFragment extends Fragment {
         });
 
         binding.btnSaveChanges.setOnClickListener(v -> {
+            mTodoService = ((TodoApp) getActivity().getApplication()).getAPI();
             String newUsername = binding.editTextChangeUsername.getText().toString();
+            String newName = binding.editTextChangeName.getText().toString();
+            String newCountry = binding.editTextChangeCountry.getText().toString();
+            String newEmail = binding.editTextChangeEmail.getText().toString();
+            String newPhoneNumber = binding.editTextChangePhoneNumber.getText().toString();
             String newPassword = binding.editTextChangePassword.getText().toString();
+            String newAboutMe = binding.editTextChangeAboutMe.getText().toString();
 
+            Call<User> call = mTodoService.modify(new UserModify(newUsername,newName,newCountry,newEmail,newPhoneNumber,newPassword,newAboutMe));
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(getContext(), "Dades personals actualitzades", Toast.LENGTH_LONG).show();
+                        binding.editTextChangeUsername.setText("");
+                        binding.editTextChangePassword.setText("");
+                    } else {
+                        Toast.makeText(getContext(), "Error modificant les dades personals", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(getContext(), "Fallada modificant les dades personals: " + t.getMessage(), Toast.LENGTH_LONG).show();
+
+                }
+            });
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("username", newUsername);
             editor.putString("password", newPassword);
