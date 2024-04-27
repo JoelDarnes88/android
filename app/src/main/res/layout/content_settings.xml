@@ -60,11 +60,73 @@
         app:layout_constraintTop_toBottomOf="@id/textView_account_settings" />
 
     <EditText
+        android:id="@+id/editText_change_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nom nou"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_change_username" />
+
+
+    <EditText
+        android:id="@+id/editText_change_country"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:hint="Regió nou"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_change_username" />
+
+    <EditText
+        android:id="@+id/editText_change_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:hint="Correu nou"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_change_username" />
+
+    <EditText
+        android:id="@+id/editText_change_phone_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:hint="Número de telèfon nou"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_change_username" />
+
+    <EditText
         android:id="@+id/editText_change_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="192dp"
         android:hint="Contrasenya nova"
         android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_change_username" />
+
+    <EditText
+        android:id="@+id/editText_change_about_me"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:hint="Sobre mi"
+        android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,20 +136,21 @@
         android:id="@+id/btn_save_changes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:text="Desa Canvis"
-        app:layout_constraintTop_toBottomOf="@id/editText_change_password"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText_change_password" />
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
         android:text="Tanca Sessió"
-        app:layout_constraintTop_toBottomOf="@id/btn_save_changes"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_save_changes" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
