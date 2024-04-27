@@ -200,10 +200,6 @@ public class HomePostsFragment extends Fragment {
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //int duration = Toast.LENGTH_LONG;
-                    //Toast toast = Toast.makeText(context, String.format("Post numero: %1d", holder.getBindingAdapterPosition()), duration);
-                    //toast.show();
-
                     String postId = String.valueOf(post.getId());
                     Intent intent = new Intent(context, PostDetallHomeActivity.class);
                     intent.putExtra("POST_ID", postId);
@@ -237,13 +233,11 @@ public class HomePostsFragment extends Fragment {
             super.onAttachedToRecyclerView(recyclerView);
         }
 
-        // Insert a new item to the RecyclerView
         public void insert(int position, Post post) {
             list.add(position, post);
             notifyItemInserted(position);
         }
 
-        // Remove a RecyclerView item containing the Data object
         public void remove(Post post) {
             int position = list.indexOf(post);
             list.remove(position);
