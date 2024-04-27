@@ -3,6 +3,7 @@ package org.udg.pds.todoandroid.rest;
 import org.udg.pds.todoandroid.entity.IdObject;
 import org.udg.pds.todoandroid.entity.Task;
 import org.udg.pds.todoandroid.entity.User;
+import org.udg.pds.todoandroid.entity.UserModify;
 import org.udg.pds.todoandroid.entity.UserRegister;
 import org.udg.pds.todoandroid.entity.UserLogin;
 import org.udg.pds.todoandroid.entity.Post;
@@ -34,6 +35,9 @@ public interface TodoApi {
 
     @GET("/users/check")
     Call<String> check();
+
+    @POST("/users/modify")
+    Call<User> modify(@Body UserModify modify);
 
     @POST("/tasks")
     Call<IdObject> addTask(@Body Task task);
