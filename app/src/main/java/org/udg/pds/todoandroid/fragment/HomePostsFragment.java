@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +27,6 @@ import org.udg.pds.todoandroid.activity.PostDetallHomeActivity;
 import org.udg.pds.todoandroid.databinding.FragmentHomePostsBinding;
 import org.udg.pds.todoandroid.entity.Post;
 import org.udg.pds.todoandroid.rest.TodoApi;
-import org.udg.pds.todoandroid.util.Global;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,11 +53,45 @@ public class HomePostsFragment extends Fragment {
         binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                updatePostList();
+                updatePostList("");
             }
         });
+        binding.backToFeed.setVisibility(View.GONE);
+        setupSearchViewAndBackArrow();
+
         return binding.getRoot();
 
+    }
+
+    private void setupSearchViewAndBackArrow() {
+        androidx.appcompat.widget.SearchView searchView = binding.searchViewHomePosts;
+        ImageView backToFeed = binding.backToFeed;
+
+        binding.searchViewHomePosts.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                updatePostList(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()) {
+                    updatePostList("");
+                    backToFeed.setVisibility(View.GONE);
+                } else {
+                    backToFeed.setVisibility(View.VISIBLE);
+                }
+                return true;
+            }
+        });
+
+        backToFeed.setOnClickListener(view -> {
+            searchView.setQuery("", false);
+            searchView.clearFocus();
+            updatePostList("");
+            backToFeed.setVisibility(View.GONE);
+        });
     }
 
     @Override
@@ -74,7 +109,7 @@ public class HomePostsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        this.updatePostList();
+        this.updatePostList("");
     }
 
     public void showPostsList(List<Post> pl) {
@@ -85,9 +120,16 @@ public class HomePostsFragment extends Fragment {
     }
 
 
-    public void updatePostList() {
+    public void updatePostList(String query) {
 
-        Call<List<Post>> call = mTodoService.getPosts();
+        Call<List<Post>> call;
+
+        if (query.isEmpty()) {
+            call = mTodoService.getPosts();
+        } else {
+            call = mTodoService.getPostSearch(query);
+        }
+
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -158,10 +200,6 @@ public class HomePostsFragment extends Fragment {
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //int duration = Toast.LENGTH_LONG;
-                    //Toast toast = Toast.makeText(context, String.format("Post numero: %1d", holder.getBindingAdapterPosition()), duration);
-                    //toast.show();
-
                     String postId = String.valueOf(post.getId());
                     Intent intent = new Intent(context, PostDetallHomeActivity.class);
                     intent.putExtra("POST_ID", postId);
@@ -195,13 +233,11 @@ public class HomePostsFragment extends Fragment {
             super.onAttachedToRecyclerView(recyclerView);
         }
 
-        // Insert a new item to the RecyclerView
         public void insert(int position, Post post) {
             list.add(position, post);
             notifyItemInserted(position);
         }
 
-        // Remove a RecyclerView item containing the Data object
         public void remove(Post post) {
             int position = list.indexOf(post);
             list.remove(position);

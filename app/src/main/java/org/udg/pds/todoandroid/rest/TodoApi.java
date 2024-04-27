@@ -22,6 +22,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by imartin on 13/02/17.
@@ -69,5 +70,9 @@ public interface TodoApi {
 
     @PUT("/posts/{id}")
     Call<Void> updatePost(@Path("id") String postId, @Body Post post);
+
+    @GET("/posts/search")
+    Call<List<Post>> getPostSearch(@Query("query") String query);
+
 }
 

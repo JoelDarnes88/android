@@ -50,5 +50,6 @@
     <string name="placeholder1">General paintwork</string>
     <string name="placeholder2">Placeholder description</string>
     <string name="placeholder3">Service 1 average rating</string>
+    <string name="back_to_feed_description">tornar al feed\n</string>
 
 </resources>
