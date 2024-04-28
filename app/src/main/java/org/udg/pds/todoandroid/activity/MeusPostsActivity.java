@@ -100,13 +100,11 @@ public class MeusPostsActivity extends AppCompatActivity {
 
     static class PostsViewHolder extends RecyclerView.ViewHolder {
         TextView title;
-        TextView description;
         TextView price;
 
         PostsViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.post_item_titol);
-            description = itemView.findViewById(R.id.post_item_descripcio);
             price = itemView.findViewById(R.id.post_item_preu);
         }
     }
@@ -130,7 +128,6 @@ public class MeusPostsActivity extends AppCompatActivity {
         public void onBindViewHolder(PostsViewHolder holder, int position) {
             Post post = posts.get(position);
             holder.title.setText(post.getTitol());
-            holder.description.setText(post.getDescripcio());
             holder.price.setText(String.valueOf(post.getPreu()));
 
             holder.itemView.setOnClickListener(view -> {

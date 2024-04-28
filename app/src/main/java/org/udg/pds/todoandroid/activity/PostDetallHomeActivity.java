@@ -11,6 +11,7 @@ import android.widget.Toast;
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
 import org.udg.pds.todoandroid.entity.Post;
+import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.fragment.HomePostsFragment;
 import org.udg.pds.todoandroid.rest.TodoApi;
 
@@ -64,10 +65,14 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         TextView titol = findViewById(R.id.tvTitle);
         TextView descripcio = findViewById(R.id.tvDescription);
         TextView preu = findViewById(R.id.tvPrice);
-
+        TextView userPropietari = findViewById(R.id.tvUserName);
+        User u = p.getUser();
+        Long userID = p.getUserId();
         titol.setText(p.getTitol());
         descripcio.setText(p.getDescripcio());
         preu.setText(String.format(Locale.getDefault(), "$%.2f", p.getPreu()));
+        userPropietari.setText(u.getName());
+
     }
 
 }

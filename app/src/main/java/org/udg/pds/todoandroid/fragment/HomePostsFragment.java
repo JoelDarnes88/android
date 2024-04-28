@@ -30,6 +30,7 @@ import org.udg.pds.todoandroid.rest.TodoApi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -166,7 +167,6 @@ public class HomePostsFragment extends Fragment {
             super(itemView);
             view = itemView;
             titol = itemView.findViewById(R.id.post_item_titol);
-            descripcio = itemView.findViewById(R.id.post_item_descripcio);
             preu = itemView.findViewById(R.id.post_item_preu);
 
         }
@@ -193,7 +193,7 @@ public class HomePostsFragment extends Fragment {
 
             holder.titol.setText(list.get(position).titol);
             holder.preu.setText(String.valueOf(list.get(position).preu));
-            holder.descripcio.setText(list.get(position).descripcio);
+            holder.preu.setText(String.format("€%.2f", list.get(position).preu));
 
             Post post = list.get(position);
 
@@ -209,7 +209,7 @@ public class HomePostsFragment extends Fragment {
                     context.startActivity(intent);
                 }
             });
-
+            /*
             holder.titol.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -218,7 +218,7 @@ public class HomePostsFragment extends Fragment {
                     toast.show();
                 }
             });
-
+            */
             // animate(holder);
         }
 
