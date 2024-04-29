@@ -6,62 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".activity.PostDetallHomeActivity">
 
-
-    <TextView
-        android:id="@+id/tvTitleLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Titol"
+    <ImageView
+        android:id="@+id/post_item_image"
+        android:layout_height="350dp"
+        android:layout_width="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/painting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:text="Aqui va el titol"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvTitleLabel"
-        app:layout_constraintTop_toTopOf="@id/tvTitleLabel" />
 
     <TextView
-        android:id="@+id/tvDescriptionLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Descripció"
-        app:layout_constraintStart_toStartOf="@id/tvTitleLabel"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleLabel" />
+        android:id="@+id/tvTitle"
+        android:layout_width="221dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Aqui va el titol"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_item_image" />
+
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="392dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="25dp"
         android:text="Aqui va la descripció"
-        app:layout_constraintEnd_toEndOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="@id/tvTitle"
-        app:layout_constraintTop_toTopOf="@id/tvDescriptionLabel" />
-
-    <TextView
-        android:id="@+id/tvPriceLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Preu"
-        app:layout_constraintStart_toStartOf="@id/tvDescriptionLabel"
-        app:layout_constraintTop_toBottomOf="@id/tvDescriptionLabel" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <TextView
         android:id="@+id/tvPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Aqui va el preu"
-        app:layout_constraintEnd_toEndOf="@id/tvDescription"
-        app:layout_constraintStart_toStartOf="@id/tvDescription"
-        app:layout_constraintTop_toTopOf="@id/tvPriceLabel" />
+        android:layout_width="133dp"
+        android:layout_height="51dp"
+        android:text="50 €"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
 
 
     <Button
@@ -73,15 +65,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/boto_eliminar" />
 
+
     <Button
         android:id="@+id/boto_eliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="44dp"
         android:text="ELIMINAR"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
