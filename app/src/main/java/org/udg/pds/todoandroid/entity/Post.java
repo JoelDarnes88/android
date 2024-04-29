@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import java.util.List;
+
 /**
  * Created by imartin on 12/02/16.
  */
@@ -18,6 +20,7 @@ public class Post {
     @JsonProperty("descripcio")
     public String descripcio;
     public User creador;
+    private List<String> images;
 
 
     public Post() {}
@@ -44,5 +47,13 @@ public class Post {
 
     public Double getPreu() {
         return preu;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

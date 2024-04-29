@@ -2,6 +2,7 @@ package org.udg.pds.todoandroid.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
+import org.udg.pds.todoandroid.adapter.ImagesAdapter;
 import org.udg.pds.todoandroid.entity.Post;
 import org.udg.pds.todoandroid.fragment.HomePostsFragment;
 import org.udg.pds.todoandroid.rest.TodoApi;
@@ -24,8 +26,6 @@ import retrofit2.Response;
 public class PostDetallHomeActivity extends AppCompatActivity {
 
     TodoApi mApiService;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +64,15 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         TextView titol = findViewById(R.id.tvTitle);
         TextView descripcio = findViewById(R.id.tvDescription);
         TextView preu = findViewById(R.id.tvPrice);
+        RecyclerView recyclerView = findViewById(R.id.images_recycler_view);
 
         titol.setText(p.getTitol());
         descripcio.setText(p.getDescripcio());
-        preu.setText(String.format(Locale.getDefault(), "$%.2f", p.getPreu()));
+        preu.setText(String.format(Locale.getDefault(), "€%.2f", p.getPreu()));
+
+        ImagesAdapter adapter = new ImagesAdapter(p.getImages());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
 }

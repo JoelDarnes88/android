@@ -74,5 +74,12 @@ public interface TodoApi {
     @GET("/posts/search")
     Call<List<Post>> getPostSearch(@Query("query") String query);
 
+    @POST("/posts/{id}/images")
+    @Multipart
+    Call<String> uploadPostImages(@Path("id") Integer product_id, @Part List<MultipartBody.Part> files);
+
+    //@POST("/posts/image")
+    //Call<Boolean> deletePostImage(@Body String[] images);
+
 }
 
