@@ -19,6 +19,14 @@ public class User implements Serializable {
     public String aboutMe;
     public Double wallet;
 
+    public User() {}
+
+    public User(String username, String name, Long id){
+        this.name = name;
+        this.username = username;
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

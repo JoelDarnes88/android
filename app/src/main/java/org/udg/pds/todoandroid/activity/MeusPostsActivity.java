@@ -11,8 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
@@ -100,14 +103,13 @@ public class MeusPostsActivity extends AppCompatActivity {
 
     static class PostsViewHolder extends RecyclerView.ViewHolder {
         TextView title;
-        TextView description;
         TextView price;
-
+        ImageView imageView;
         PostsViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.post_item_titol);
-            description = itemView.findViewById(R.id.post_item_descripcio);
             price = itemView.findViewById(R.id.post_item_preu);
+            imageView = itemView.findViewById(R.id.post_item_image);
         }
     }
 
@@ -130,8 +132,13 @@ public class MeusPostsActivity extends AppCompatActivity {
         public void onBindViewHolder(PostsViewHolder holder, int position) {
             Post post = posts.get(position);
             holder.title.setText(post.getTitol());
-            holder.description.setText(post.getDescripcio());
             holder.price.setText(String.valueOf(post.getPreu()));
+
+            if (!post.getImages().isEmpty()) {
+                Picasso.get().load(post.getImages().get(0)).into(holder.imageView);
+            } else {
+                holder.imageView.setImageResource(R.drawable.painting);
+            }
 
             holder.itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(MeusPostsActivity.this, MeusPostsDetallActivity.class);
@@ -164,9 +171,5 @@ public class MeusPostsActivity extends AppCompatActivity {
             notifyItemRangeRemoved(0, size);
         }
     }
-
-
-
-
 
 }

@@ -1,6 +1,9 @@
 package org.udg.pds.todoandroid.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +13,9 @@ import android.widget.Toast;
 
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
+import org.udg.pds.todoandroid.adapter.ImagesAdapter;
 import org.udg.pds.todoandroid.entity.Post;
+import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.rest.TodoApi;
 
 import java.util.Locale;
@@ -85,10 +90,14 @@ public class MeusPostsDetallActivity extends AppCompatActivity {
         TextView titol = findViewById(R.id.tvTitle);
         TextView descripcio = findViewById(R.id.tvDescription);
         TextView preu = findViewById(R.id.tvPrice);
+        ViewPager2 viewPager = findViewById(R.id.meus_post_item_image);
 
         titol.setText(p.getTitol());
         descripcio.setText(p.getDescripcio());
         preu.setText(String.format(Locale.getDefault(), "$%.2f", p.getPreu()));
+
+        ImagesAdapter adapter = new ImagesAdapter(this, p.getImages());
+        viewPager.setAdapter(adapter);
     }
 
     private void deletePost() {
