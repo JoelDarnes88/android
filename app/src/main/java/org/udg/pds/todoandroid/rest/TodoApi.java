@@ -32,7 +32,7 @@ public interface TodoApi {
     Call<User> login(@Body UserLogin login);
 
     @POST("/users/register")
-    Call<User> register(@Body UserRegister register);
+    Call<Void> register(@Body UserRegister register);
 
     @GET("/users/search")
     Call<List<User>> searchUser(@Query("query") String query);
