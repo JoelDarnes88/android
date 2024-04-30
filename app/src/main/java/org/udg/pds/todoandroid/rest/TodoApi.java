@@ -8,10 +8,10 @@ import org.udg.pds.todoandroid.entity.UserRegister;
 import org.udg.pds.todoandroid.entity.UserLogin;
 import org.udg.pds.todoandroid.entity.Post;
 
-import java.util.Collection;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -78,6 +78,13 @@ public interface TodoApi {
 
     @GET("/posts/search")
     Call<List<Post>> getPostSearch(@Query("query") String query);
+
+    @Multipart
+    @POST("/posts/postImage")
+    Call<ResponseBody> addPostImages(@Part("titol") RequestBody titol,
+                                    @Part("descripcio") RequestBody descripcio,
+                                    @Part("preu") RequestBody preu,
+                                    @Part List<MultipartBody.Part> files);
 
 
 }

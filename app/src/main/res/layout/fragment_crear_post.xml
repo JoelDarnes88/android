@@ -47,36 +47,73 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
 
 
-    <Button
-        android:id="@+id/buttonSelectImage"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Seleccionar Imatge"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedImagePreview" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrice">
 
-    <ImageView
-        android:id="@+id/selectedImagePreview"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/ic_menu_gallery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrice" />
+        <ImageView
+            android:id="@+id/selectedImagePreview1"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/add_img"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/selectedImagePreview2"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/add_img"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/selectedImagePreview3"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/add_img"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/selectedImagePreview4"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/add_img"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
 
 
     <Button
         android:id="@+id/buttonSubmitPost"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="392dp"
-        android:text="CREAR"
+        android:layout_marginTop="75dp"
+        android:text="Submit Post"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
