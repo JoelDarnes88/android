@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 
 import org.udg.pds.todoandroid.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
 
@@ -17,35 +18,39 @@ import android.content.Context;
 public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewHolder> {
 
     private Context context;
-    private List<String> imageUrlList;
+    private List<String> imageUrls;
 
-    public ImagesAdapter(List<String> imageUrlList) {
+    public ImagesAdapter(Context context, List<String> imageUrls) {
         this.context = context;
-        this.imageUrlList = imageUrlList;
+        this.imageUrls = imageUrls;
+        if (imageUrls == null || imageUrls.isEmpty()) {
+            this.imageUrls = new ArrayList<>();
+            this.imageUrls.add("android.resource://org.udg.pds.todoandroid/drawable/painting");
+        }
     }
 
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.image_item, parent, false);
         return new ImageViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        String imageUrl = imageUrlList.get(position);
+        String imageUrl = imageUrls.get(position);
         Picasso.get().load(imageUrl).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return imageUrlList.size();
+        return imageUrls.size();
     }
 
-    public static class ImageViewHolder extends RecyclerView.ViewHolder {
+    static class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 
-        public ImageViewHolder(@NonNull View itemView) {
+        ImageViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_view);
         }

@@ -51,5 +51,9 @@
     <string name="placeholder2">Placeholder description</string>
     <string name="placeholder3">Service 1 average rating</string>
     <string name="back_to_feed_description">tornar al feed\n</string>
+    <string name="title">Titol</string>
+    <string name="description">Descripcio</string>
+    <string name="price">Preu</string>
+    <string name="select_images">Select IMG</string>
 
 </resources>

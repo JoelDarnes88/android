@@ -6,17 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".activity.PostDetallHomeActivity">
 
-    <ImageView
-        android:id="@+id/post_item_image"
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/meus_post_item_image"
+        android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_width="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/painting"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/tvTitle"
@@ -28,7 +26,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_item_image" />
+        app:layout_constraintTop_toBottomOf="@+id/meus_post_item_image" />
 
 
     <TextView

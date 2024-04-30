@@ -15,12 +15,10 @@
             android:id="@+id/post_item_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/painting"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/post_item_titol"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/post_item_titol"

@@ -3,6 +3,7 @@ package org.udg.pds.todoandroid.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -65,21 +66,19 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         TextView titol = findViewById(R.id.tvTitle);
         TextView descripcio = findViewById(R.id.tvDescription);
         TextView preu = findViewById(R.id.tvPrice);
-        RecyclerView recyclerView = findViewById(R.id.images_recycler_view);
-
         TextView userPropietari = findViewById(R.id.tvUserName);
+        ViewPager2 viewPager = findViewById(R.id.post_item_image);
+
         User u = p.getUser();
         Long userID = p.getUserId();
+
         titol.setText(p.getTitol());
         descripcio.setText(p.getDescripcio());
-        preu.setText(String.format(Locale.getDefault(), "€%.2f", p.getPreu()));
-
-        ImagesAdapter adapter = new ImagesAdapter(p.getImages());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         preu.setText(String.format(Locale.getDefault(), "$%.2f", p.getPreu()));
         userPropietari.setText(u.getName());
 
+        ImagesAdapter adapter = new ImagesAdapter(this, p.getImages());
+        viewPager.setAdapter(adapter);
     }
 
 }

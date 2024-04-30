@@ -21,6 +21,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
 import org.udg.pds.todoandroid.activity.PostDetallHomeActivity;
@@ -162,13 +164,14 @@ public class HomePostsFragment extends Fragment {
         TextView preu;
         TextView usuari;
         View view;
+        ImageView imageView;
 
         PostsViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             titol = itemView.findViewById(R.id.post_item_titol);
             preu = itemView.findViewById(R.id.post_item_preu);
-
+            imageView = itemView.findViewById(R.id.post_item_image);
         }
     }
 
@@ -192,23 +195,24 @@ public class HomePostsFragment extends Fragment {
         public void onBindViewHolder(HomePostsFragment.PostsViewHolder holder, final int position) {
 
             holder.titol.setText(list.get(position).titol);
-            holder.preu.setText(String.valueOf(list.get(position).preu));
             holder.preu.setText(String.format("€%.2f", list.get(position).preu));
-
             Post post = list.get(position);
 
-            holder.view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String postId = String.valueOf(post.getId());
-                    Intent intent = new Intent(context, PostDetallHomeActivity.class);
-                    intent.putExtra("POST_ID", postId);
-                    if (!(context instanceof Activity)) {
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    }
-                    context.startActivity(intent);
+            if (post.getImages() != null && !post.getImages().isEmpty()) {
+                Picasso.get().load(post.getImages().get(0)).into(holder.imageView);
+            } else {
+                holder.imageView.setImageResource(R.drawable.painting);
+            }
+
+            holder.view.setOnClickListener(view -> {
+                Intent intent = new Intent(context, PostDetallHomeActivity.class);
+                intent.putExtra("POST_ID", String.valueOf(post.getId()));
+                if (!(context instanceof Activity)) {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
+                context.startActivity(intent);
             });
+
             /*
             holder.titol.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -261,4 +265,3 @@ public class HomePostsFragment extends Fragment {
         }
     }
 }
-
