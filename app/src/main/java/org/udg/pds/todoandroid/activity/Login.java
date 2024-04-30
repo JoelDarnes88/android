@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
     TodoApi mTodoService;
     private LoginBinding binding;
 
-    public static final String SHARED_PREFS_KEY = "user_data";
+    public static final String SHARED_PREFS_KEY = "loggedUser";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

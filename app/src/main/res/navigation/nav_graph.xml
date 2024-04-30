@@ -27,18 +27,25 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="org.udg.pds.todoandroid.fragment.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="Settings" />
     <fragment
         android:id="@+id/homePostsFragment"
         android:name="org.udg.pds.todoandroid.fragment.HomePostsFragment"
-        android:label="fragment_home_posts"
+        android:label="Home posts"
         tools:layout="@layout/fragment_home_posts" />
     <fragment
         android:id="@+id/crearPostFragment"
         android:name="org.udg.pds.todoandroid.fragment.CrearPostFragment"
-        android:label="fragment_crear_post"
+        android:label="Create post"
         tools:layout="@layout/fragment_crear_post" />
-    <activity
-        android:id="@+id/action_profile"
-        android:name="org.udg.pds.todoandroid.activity.ProfileActivity"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="org.udg.pds.todoandroid.fragment.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="org.udg.pds.todoandroid.fragment.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search"/>
 </navigation>
