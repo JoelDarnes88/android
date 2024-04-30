@@ -51,12 +51,11 @@ public class User implements Serializable {
         return phoneNumber;
     }
 
-    public Double getWallet() {
-        return wallet;
-    }
-
     public String getAboutMe() {
         return aboutMe;
     }
 
+    public Double getWallet() {
+        return wallet;
+    }
 }

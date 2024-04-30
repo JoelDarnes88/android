@@ -21,7 +21,7 @@
         android:title="@string/text_image"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_profile"
+        android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/profile_logo"
         android:title="@string/profile"
