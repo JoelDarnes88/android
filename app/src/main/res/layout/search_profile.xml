@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.SearchFragment">
+
+    <View
+        android:id="@+id/profileCircle1"
+        android:background="@drawable/profile_circle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="-37.5dp"
+        app:layout_constraintStart_toStartOf="@id/profileRectangle"
+        app:layout_constraintTop_toTopOf="@id/profileRectangle"
+        app:layout_constraintBottom_toBottomOf="@id/profileRectangle"/>
+
+    <View
+        android:id="@+id/profileRectangle"
+        android:background="#d0f4fc"
+        android:layout_width="275dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/profileCircle2"
+        android:background="@drawable/profile_circle"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="-37.5dp"
+        app:layout_constraintEnd_toEndOf="@id/profileRectangle"
+        app:layout_constraintTop_toTopOf="@id/profileRectangle"
+        app:layout_constraintBottom_toBottomOf="@id/profileRectangle"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePicture"
+        android:src="@drawable/default_pfp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:civ_border_color="#20cce4"
+        app:civ_border_width="3dp"
+        app:layout_constraintStart_toStartOf="@id/profileCircle1"
+        app:layout_constraintEnd_toEndOf="@id/profileCircle1"
+        app:layout_constraintTop_toTopOf="@id/profileCircle1"
+        app:layout_constraintBottom_toBottomOf="@id/profileCircle1"
+        tools:ignore="ImageContrastCheck"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/default_name"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintStart_toEndOf="@id/profilePicture"
+        app:layout_constraintTop_toTopOf="@id/profilePicture"
+        app:layout_constraintBottom_toBottomOf="@id/profilePicture"/>
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/default_username"
+        android:textColor="#666666"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toEndOf="@id/profilePicture"
+        app:layout_constraintTop_toTopOf="@id/profilePicture"
+        app:layout_constraintBottom_toBottomOf="@id/profilePicture"/>
+
+    <ImageView
+        android:id="@+id/averageGlobalRatingStar"
+        app:srcCompat="@drawable/black_star"
+        android:contentDescription="@string/average_global_rating"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="-30dp"
+        app:layout_constraintStart_toStartOf="@id/profileCircle2"
+        app:layout_constraintTop_toTopOf="@id/profileCircle2"
+        app:layout_constraintBottom_toBottomOf="@id/profileCircle2"/>
+
+    <TextView
+        android:id="@+id/averageGlobalRating"
+        android:text="@string/default_rating"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@id/averageGlobalRatingStar"
+        app:layout_constraintTop_toTopOf="@id/averageGlobalRatingStar"
+        app:layout_constraintBottom_toBottomOf="@id/averageGlobalRatingStar"/>
+
+    <TextView
+        android:id="@+id/globalAmountRatings"
+        android:text="@string/default_amount_ratings"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:gravity="start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@id/averageGlobalRating"
+        app:layout_constraintTop_toTopOf="@id/averageGlobalRating"
+        app:layout_constraintBottom_toBottomOf="@id/averageGlobalRating"/>
+
+    <Button
+        android:id="@+id/profile"
+        android:layout_width="350dp"
+        android:layout_height="75dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/profileButton"
+        app:layout_constraintStart_toStartOf="@id/profileRectangle"
+        app:layout_constraintEnd_toEndOf="@id/profileRectangle"
+        app:layout_constraintTop_toTopOf="@id/profileRectangle"
+        app:layout_constraintBottom_toBottomOf="@id/profileRectangle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

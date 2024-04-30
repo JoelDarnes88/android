@@ -5,72 +5,119 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ProfileActivity">
+    android:background="#ffffff"
+    android:id="@+id/container"
+    tools:context=".fragment.ProfileFragment">
 
     <View
-        android:id="@+id/border1"
-        android:background="#20cce4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/searchCircle1"
+        android:background="@drawable/search_circle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="-75dp"
+        app:layout_constraintStart_toStartOf="@id/searchBarRectangle1"
+        app:layout_constraintEnd_toStartOf="@id/searchBarRectangle1"
+        app:layout_constraintTop_toTopOf="@id/searchBarRectangle1"
+        app:layout_constraintBottom_toBottomOf="@id/searchBarRectangle1"/>
+
+    <View
+        android:id="@+id/searchCircle2"
+        android:background="@drawable/search_circle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="-75dp"
+        app:layout_constraintStart_toEndOf="@id/searchBarRectangle1"
+        app:layout_constraintEnd_toEndOf="@id/searchBarRectangle1"
+        app:layout_constraintTop_toTopOf="@id/searchBarRectangle1"
+        app:layout_constraintBottom_toBottomOf="@id/searchBarRectangle1"/>
+
+    <View
+        android:id="@+id/searchBarRectangle1"
+        android:background="@drawable/search_rectangle"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@id/rectangle2"/>
 
     <View
-        android:id="@+id/border2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/searchBarRectangle2"
         android:background="#ffffff"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/rectangle2"/>
+
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:autofillHints=""
+        android:background="@null"
+        android:hint="@string/search_bar_hint"
+        android:imeOptions="actionGo"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:textColorHint="#000000"
+        app:layout_constraintBottom_toBottomOf="@id/searchCircle1"
+        app:layout_constraintStart_toStartOf="@id/searchCircle1"
+        app:layout_constraintTop_toTopOf="@id/searchCircle1"
+        tools:ignore="RtlSymmetry,TouchTargetSizeCheck"/>
 
     <Button
-        android:id="@+id/editButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/edit_profile_symbol"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:id="@+id/searchIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/search_bar_icon"
+        android:contentDescription="@string/search_bar"
+        app:layout_constraintBottom_toBottomOf="@id/searchCircle2"
+        app:layout_constraintEnd_toEndOf="@id/searchCircle2"
+        app:layout_constraintStart_toStartOf="@id/searchCircle2"
+        app:layout_constraintTop_toTopOf="@id/searchCircle2"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/settings_icon"
+        android:contentDescription="@string/settings"
+        app:layout_constraintEnd_toEndOf="@id/profileCircle2"
+        app:layout_constraintTop_toTopOf="@id/profileCircle2"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <View
-        android:id="@+id/circle1"
-        android:background="@drawable/circle_shape"
+        android:id="@+id/profileCircle1"
+        android:background="@drawable/profile_circle"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginEnd="-75dp"
-        app:layout_constraintEnd_toEndOf="@id/rectangle1"
-        app:layout_constraintTop_toTopOf="@id/rectangle1"
-        app:layout_constraintBottom_toBottomOf="@id/rectangle1"/>
+        android:layout_marginStart="-75dp"
+        app:layout_constraintStart_toStartOf="@id/rectangle2"
+        app:layout_constraintTop_toTopOf="@id/rectangle2"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
 
     <View
-        android:id="@+id/rectangle1"
+        android:id="@+id/rectangle2"
         android:background="#d0f4fc"
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <View
-        android:id="@+id/circle2"
-        android:background="@drawable/circle_shape"
+        android:id="@+id/profileCircle2"
+        android:background="@drawable/profile_circle"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginStart="-75dp"
-        app:layout_constraintStart_toStartOf="@id/rectangle1"
-        app:layout_constraintTop_toTopOf="@id/rectangle1"
-        app:layout_constraintBottom_toBottomOf="@id/rectangle1"/>
+        android:layout_marginEnd="-75dp"
+        app:layout_constraintEnd_toEndOf="@id/rectangle2"
+        app:layout_constraintTop_toTopOf="@id/rectangle2"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePicture"
@@ -80,9 +127,9 @@
         android:layout_marginStart="-75dp"
         app:civ_border_color="#20cce4"
         app:civ_border_width="5dp"
-        app:layout_constraintStart_toStartOf="@id/rectangle1"
-        app:layout_constraintBottom_toBottomOf="@id/rectangle1"
-        app:layout_constraintTop_toTopOf="@id/rectangle1"
+        app:layout_constraintStart_toStartOf="@id/rectangle2"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle2"
+        app:layout_constraintTop_toTopOf="@id/rectangle2"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
@@ -95,9 +142,9 @@
         android:text="@string/default_name"
         android:textColor="#000000"
         android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@id/rectangle1"
-        app:layout_constraintEnd_toEndOf="@id/rectangle1"
-        app:layout_constraintTop_toTopOf="@id/rectangle1"
+        app:layout_constraintStart_toStartOf="@id/rectangle2"
+        app:layout_constraintEnd_toEndOf="@id/rectangle2"
+        app:layout_constraintTop_toTopOf="@id/rectangle2"
         tools:ignore="TextSizeCheck,VisualLintOverlap"/>
 
     <TextView
@@ -120,9 +167,9 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginBottom="40dp"
-        app:layout_constraintStart_toStartOf="@id/rectangle1"
-        app:layout_constraintEnd_toEndOf="@id/rectangle1"
-        app:layout_constraintBottom_toBottomOf="@id/rectangle1"/>
+        app:layout_constraintStart_toStartOf="@id/rectangle2"
+        app:layout_constraintEnd_toEndOf="@id/rectangle2"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
 
     <TextView
         android:id="@+id/averageGlobalRating"
@@ -336,6 +383,6 @@
         android:layout_marginTop="32dp"
         android:text="Meus Posts"
         app:layout_constraintStart_toStartOf="@+id/Service1"
-        app:layout_constraintTop_toBottomOf="@+id/Service1" />
+        app:layout_constraintTop_toBottomOf="@+id/Service1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
