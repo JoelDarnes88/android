@@ -1,5 +1,6 @@
 package org.udg.pds.todoandroid.fragment;
 
+import static org.udg.pds.todoandroid.activity.Login.SHARED_PREFS_KEY;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -97,6 +98,29 @@ public class SettingsFragment extends Fragment {
             new LogOut().performLogout(getActivity());
         });
 
+        binding.btnDeleteAccount.setOnClickListener(view -> {
+            mTodoService = ((TodoApp) getActivity().getApplication()).getAPI();
+            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
+            String id = sharedPreferences.getString("id", "");
+            Call<Void> call = mTodoService.deleteAccount(id);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(getContext(), "Compta esborrada correctament", Toast.LENGTH_LONG).show();
+                        new LogOut().performLogout(getActivity());
+                    } else {
+                        Toast.makeText(getContext(), "Error esborrant la compta", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(getContext(), "Fallada esborrant la compta: " + t.getMessage(), Toast.LENGTH_LONG).show();
+
+                }
+            });
+        });
 
         return binding.getRoot();
     }

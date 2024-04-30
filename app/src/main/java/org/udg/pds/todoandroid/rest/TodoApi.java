@@ -43,6 +43,9 @@ public interface TodoApi {
     @POST("/users/modify")
     Call<User> modify(@Body UserModify modify);
 
+    @DELETE("/users/{id}")
+    Call<Void> deleteAccount(@Path("id") String userId);
+
     @POST("/tasks")
     Call<IdObject> addTask(@Body Task task);
 
