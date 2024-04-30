@@ -47,11 +47,11 @@ public class Register extends AppCompatActivity {
     }
 
     private void registerUser(String username, String password, String email) {
-        UserRegister userRegister = new UserRegister(username, password, email);
-        Call<User> call = mTodoService.register(userRegister);
-        call.enqueue(new Callback<User>() {
+        UserRegister userRegister = new UserRegister(username, username, "", email, "", password);
+        Call<Void> call = mTodoService.register(userRegister);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(Register.this, response.body().toString(), Toast.LENGTH_SHORT).show();
                 if (response.isSuccessful()) {
                     Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
@@ -63,7 +63,7 @@ public class Register extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(Register.this, "Error registering user, failure", Toast.LENGTH_SHORT).show();
             }
         });
