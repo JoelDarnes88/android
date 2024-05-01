@@ -52,7 +52,7 @@ public class Register extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(Register.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(Register.this, response.body().toString(), Toast.LENGTH_SHORT).show();
                 if (response.isSuccessful()) {
                     Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Register.this, Login.class));
