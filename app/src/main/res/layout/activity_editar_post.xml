@@ -36,14 +36,74 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <Button
-        android:id="@+id/buttonSavePost"
-        android:layout_width="wrap_content"
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Guardar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrice" />
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrice">
+
+        <ImageView
+            android:id="@+id/editImagePreview1"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/add_img"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/editImagePreview2"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/add_img"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/editImagePreview3"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/add_img"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <ImageView
+            android:id="@+id/editImagePreview4"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src="@drawable/add_img"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/buttonSavePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text="Guardar Post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
@@ -27,6 +30,8 @@ public class EditarPostActivity extends AppCompatActivity {
     TodoApi mTodoService;
     private EditText editTextTitle, editTextDescription, editTextPrice;
     private String postId;
+    private ImageView[] imageViews = new ImageView[4];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +43,10 @@ public class EditarPostActivity extends AppCompatActivity {
         editTextDescription = findViewById(R.id.editTextDescription);
         editTextPrice = findViewById(R.id.editTextPrice);
         Button buttonSave = findViewById(R.id.buttonSavePost);
-
+        imageViews[0] = findViewById(R.id.editImagePreview1);
+        imageViews[1] = findViewById(R.id.editImagePreview2);
+        imageViews[2] = findViewById(R.id.editImagePreview3);
+        imageViews[3] = findViewById(R.id.editImagePreview4);
 
         postId = getIntent().getStringExtra("POST_ID");
         loadPostData(postId);
@@ -74,6 +82,15 @@ public class EditarPostActivity extends AppCompatActivity {
                     editTextTitle.setText(post.getTitol());
                     editTextDescription.setText(post.getDescripcio());
                     editTextPrice.setText(String.valueOf(post.getPreu()));
+
+                    List<String> images = post.getImages();
+                    for (int i = 0; i < imageViews.length; i++) {
+                        if (i < images.size()) {
+                            Picasso.get().load(images.get(i)).into(imageViews[i]);
+                        } else {
+                            imageViews[i].setImageResource(R.drawable.add_img);
+                        }
+                    }
                 } else {
                     Toast.makeText(EditarPostActivity.this, "Fallada obtenint el post", Toast.LENGTH_SHORT).show();
 

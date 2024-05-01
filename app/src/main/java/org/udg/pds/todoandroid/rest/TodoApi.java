@@ -89,6 +89,24 @@ public interface TodoApi {
                                     @Part("preu") RequestBody preu,
                                     @Part List<MultipartBody.Part> files);
 
+    /*@Multipart
+    @PUT("/posts/updatePostImage")
+    Call<ResponseBody> updatePostImages(@Part("postId") RequestBody postId,
+                                        @Part("titol") RequestBody titol,
+                                        @Part("descripcio") RequestBody descripcio,
+                                        @Part("preu") RequestBody preu,
+                                        @Part List<MultipartBody.Part> files);
+
+     */
+    @Multipart
+    @PUT("/posts/updatePostImages/{postId}")
+    Call<ResponseBody> updatePostWithImages(
+        @Part("postId") RequestBody postId,
+        @Part("titol") RequestBody titol,
+        @Part("descripcio") RequestBody descripcio,
+        @Part("preu") RequestBody preu,
+        @Part List<MultipartBody.Part> files,
+        @Part("existingImages") List<RequestBody> existingImages);
 
 }
 
