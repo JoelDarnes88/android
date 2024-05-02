@@ -59,8 +59,6 @@ public interface TodoApi {
     @Multipart
     Call<String> uploadImage(@Part MultipartBody.Part file);
 
-    //@POST("/posts/post")
-    //Call<ResponseBody> addPost(@Body Post post);
     @POST("/posts/post")
     Call<ResponseBody> addPost(@Body Post post);
 
@@ -89,6 +87,15 @@ public interface TodoApi {
                                     @Part("preu") RequestBody preu,
                                     @Part List<MultipartBody.Part> files);
 
+    @Multipart
+    @PUT("/posts/updatePostImage/{postId}")
+    Call<ResponseBody> updatePostImage(
+        @Path("postId") String postId,
+        @Part("titol") RequestBody titol,
+        @Part("descripcio") RequestBody descripcio,
+        @Part("preu") RequestBody preu,
+        @Part("urlsToDel") List<String> urlsToDel,
+        @Part List<MultipartBody.Part> files);
 
 }
 

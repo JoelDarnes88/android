@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -173,15 +174,43 @@ public class CrearPostFragment extends Fragment {
 
         for (int i = 0; i < imageViews.length; i++) {
             int finalI = i;
-            imageViews[i].setOnClickListener(v -> pickImage(finalI));
+            imageViews[i].setOnClickListener(v -> {
+                if (selectedImages[finalI] != null) {
+                    showImageOptionsDialog(finalI);
+                } else {
+                    pickImage(finalI);
+                }
+            });
         }
     }
+
+    private void showImageOptionsDialog(int imageIndex) {
+        CharSequence[] items = {"Reemplaçar", "Eliminar"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Seleccionar opcio");
+        builder.setItems(items, (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    pickImage(imageIndex);
+                    break;
+                case 1:
+                    removeImage(imageIndex);
+                    break;
+            }
+        });
+        builder.show();
+    }
+    private void removeImage(int imageIndex) {
+        selectedImages[imageIndex] = null;
+        imageViews[imageIndex].setImageResource(R.drawable.add_img);
+    }
+
     private void pickImage(int imageIndex) {
         resetSingleImageSelection(imageIndex);
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST + imageIndex);
+        startActivityForResult(Intent.createChooser(intent, "Seleccionar imatge"), PICK_IMAGE_REQUEST + imageIndex);
     }
     private void resetSingleImageSelection(int imageIndex) {
         if (selectedImages[imageIndex] != null) {
