@@ -9,6 +9,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="forgot_password_button">Sol·licitar canvi de contrasenya</string>
     <string name="add_task">Add Task</string>
     <string name="date_created">Date created:</string>
     <string name="task_text">Text:</string>

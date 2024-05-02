@@ -34,6 +34,9 @@ public interface TodoApi {
     @POST("/users/register")
     Call<Void> register(@Body UserRegister register);
 
+    @POST("/users/forgotPassword")
+    Call<Void> forgotPassword(@Body String email);
+
     @GET("/users/search")
     Call<List<User>> searchUser(@Query("query") String query);
 

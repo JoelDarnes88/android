@@ -61,7 +61,16 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        // TextView forgotPasswordTextView = findViewById(R.id.forgot_password_text_view);
+        binding.forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Login.this.startActivity(new Intent(Login.this, ForgotPassword.class));
+            }
+        });
+
     }
+
 
     // This method is called when the "Login" button is pressed in the Login fragment
     public void checkCredentials(String username, String password) {
