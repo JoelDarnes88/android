@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ProfileFragment">
+
+    <View
+        android:id="@+id/serviceRectangle"
+        android:background="@drawable/rounded_rectangle"
+        android:layout_width="325dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/serviceLogo"
+        android:src="@drawable/all_posts_logo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:civ_border_color="#20cce4"
+        app:civ_border_width="3dp"
+        app:layout_constraintStart_toStartOf="@id/service"
+        app:layout_constraintTop_toTopOf="@id/service"
+        tools:ignore="ImageContrastCheck"/>
+
+    <TextView
+        android:id="@+id/serviceTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/service_title"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/serviceLogo"
+        app:layout_constraintEnd_toEndOf="@id/service"
+        app:layout_constraintTop_toTopOf="@id/service"
+        tools:ignore="TextSizeCheck" />
+
+    <View
+        android:id="@+id/serviceLine"
+        android:background="#aaaaaa"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/serviceTitle"
+        app:layout_constraintEnd_toEndOf="@id/serviceTitle"
+        app:layout_constraintTop_toTopOf="@id/serviceTitle"/>
+
+    <TextView
+        android:id="@+id/serviceDescription"
+        android:layout_width="200dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/service_description"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/serviceLine"
+        app:layout_constraintStart_toStartOf="@id/serviceLine"
+        app:layout_constraintTop_toTopOf="@id/serviceLine"
+        tools:ignore="TextSizeCheck" />
+
+    <ImageView
+        android:id="@+id/serviceAverageRatingStar"
+        app:srcCompat="@drawable/black_star"
+        android:contentDescription="@string/service_rating"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="-25dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintStart_toStartOf="@id/serviceLogo"
+        app:layout_constraintEnd_toEndOf="@id/serviceLogo"
+        app:layout_constraintBottom_toBottomOf="@id/service"/>
+
+    <TextView
+        android:id="@+id/serviceAverageRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="@string/default_rating"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/serviceAverageRatingStar"
+        app:layout_constraintTop_toTopOf="@id/serviceAverageRatingStar"
+        app:layout_constraintBottom_toBottomOf="@id/serviceAverageRatingStar"/>
+
+    <TextView
+        android:id="@+id/serviceAmountRatings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_amount_ratings"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/serviceAverageRatingStar"
+        app:layout_constraintEnd_toEndOf="@id/serviceAverageRating"
+        app:layout_constraintTop_toBottomOf="@id/serviceAverageRatingStar"/>
+
+    <Button
+        android:id="@+id/service"
+        android:layout_width="325dp"
+        android:layout_height="150dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/service_button"
+        app:layout_constraintStart_toStartOf="@id/serviceRectangle"
+        app:layout_constraintEnd_toEndOf="@id/serviceRectangle"
+        app:layout_constraintTop_toTopOf="@id/serviceRectangle"
+        app:layout_constraintBottom_toBottomOf="@id/serviceRectangle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

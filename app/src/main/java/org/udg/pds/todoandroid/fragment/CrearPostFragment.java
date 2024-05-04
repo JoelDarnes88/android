@@ -1,26 +1,35 @@
 package org.udg.pds.todoandroid.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
 import org.udg.pds.todoandroid.R;
+import org.udg.pds.todoandroid.activity.PostsActivity;
 import org.udg.pds.todoandroid.databinding.FragmentCrearPostBinding;
 
+import org.udg.pds.todoandroid.entity.Servei;
+import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.rest.TodoApi;
 import org.udg.pds.todoandroid.TodoApp;
 
@@ -29,6 +38,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -60,6 +70,39 @@ public class CrearPostFragment extends Fragment {
 
         setupImageViews();
 
+        Spinner spinner = (Spinner) binding.spinnerServei;
+        mTodoService = ((TodoApp) getActivity().getApplication()).getAPI();
+        Call<List<Servei>> call = mTodoService.getServices();
+        call.enqueue(new Callback<List<Servei>>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<List<Servei>> call, Response<List<Servei>> response) {
+                if (response.isSuccessful()) {
+                    List<Servei> serviceList = response.body();
+                    List<String> serviceNames = new ArrayList<>();
+                    serviceNames.add("Escollir tipus servei");
+                    assert serviceList != null;
+                    for (Servei servei : serviceList) {
+                        serviceNames.add(servei.getName());
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        container.getContext(),
+                        android.R.layout.simple_spinner_item,
+                        serviceNames
+                    );
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+                }
+                else Toast.makeText(getActivity(), "Failed to retrieve services", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<List<Servei>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return binding.getRoot();
     }
 
@@ -73,7 +116,20 @@ public class CrearPostFragment extends Fragment {
         EditText editTextPrice = binding.editTextPrice;
         Button buttonSubmit = binding.buttonSubmitPost;
 
-        binding.buttonSubmitPost.setOnClickListener(new View.OnClickListener() {
+        final String[] nomServei = new String[1];
+        binding.spinnerServei.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                nomServei[0] = parentView.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                Toast.makeText(getContext(), "Cap opció seleccionada", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String title = editTextTitle.getText().toString();
@@ -86,59 +142,61 @@ public class CrearPostFragment extends Fragment {
                     return;
                 }
 
+                if (Objects.equals(nomServei[0], "Escollir tipus servei")) Toast.makeText(getContext(), "Servei no escollit", Toast.LENGTH_LONG).show();
+                else {
+                    for (Uri si : selectedImages) { //TRACTAMENT IMATGES
+                        if (si != null) {
+                            try {
+                                InputStream is = getContext().getContentResolver().openInputStream(si);
+                                String extension = "." + MimeTypeMap.getSingleton().getExtensionFromMimeType(getContext().getContentResolver().getType(si));
+                                File tempFile = File.createTempFile("upload", extension, getContext().getCacheDir());
+                                FileOutputStream outs = new FileOutputStream(tempFile);
+                                IOUtils.copy(is, outs);
+                                // create RequestBody instance from file
+                                RequestBody requestFile =
+                                    RequestBody.create(
+                                        MediaType.parse(getContext().getContentResolver().getType(si)),
+                                        tempFile
+                                    );
 
-                for (Uri si : selectedImages) { //TRACTAMENT IMATGES
-                    if (si != null) {
-                        try {
-                            InputStream is = getContext().getContentResolver().openInputStream(si);
-                            String extension = "." + MimeTypeMap.getSingleton().getExtensionFromMimeType(getContext().getContentResolver().getType(si));
-                            File tempFile = File.createTempFile("upload", extension, getContext().getCacheDir());
-                            FileOutputStream outs = new FileOutputStream(tempFile);
-                            IOUtils.copy(is, outs);
-                            // create RequestBody instance from file
-                            RequestBody requestFile =
-                                RequestBody.create(
-                                    MediaType.parse(getContext().getContentResolver().getType(si)),
-                                    tempFile
-                                );
+                                // MultipartBody.Part is used to send also the actual file name
+                                MultipartBody.Part body =
+                                    MultipartBody.Part.createFormData("files", tempFile.getName(), requestFile);
 
-                            // MultipartBody.Part is used to send also the actual file name
-                            MultipartBody.Part body =
-                                MultipartBody.Part.createFormData("files", tempFile.getName(), requestFile);
-
-                            files.add(body);
+                                files.add(body);
 
 
-                        } catch (Exception e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            } catch (Exception e) {
+                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
+
+                    //RequestBody per cada camp
+                    RequestBody titol = RequestBody.create(MediaType.parse("multipart/form-data"), title);
+                    RequestBody descripcio = RequestBody.create(MediaType.parse("multipart/form-data"), description);
+                    RequestBody preu = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(price));
+                    RequestBody servei = RequestBody.create(MediaType.parse("multipart/form-data"), nomServei[0]);
+
+                    //ENDPOINT
+                    Call<Void> call = mTodoService.addPostImages(titol, descripcio, preu, servei/*, files*/);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(getContext(), "Post creat!", Toast.LENGTH_SHORT).show();
+                                clearFormFields(editTextTitle, editTextDescription, editTextPrice);
+                                resetImageSelections();
+                            } else
+                                Toast.makeText(getContext(), "Response error!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(getContext(), "Failure!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-
-
-                //RequestBody per cada camp
-                RequestBody titol = RequestBody.create(MediaType.parse("multipart/form-data"), title);
-                RequestBody descripcio = RequestBody.create(MediaType.parse("multipart/form-data"), description);
-                RequestBody preu = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(price));
-
-                //ENDPOINT
-                Call<ResponseBody> call = mTodoService.addPostImages(titol, descripcio, preu, files);
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(getContext(), "Post creat OK!", Toast.LENGTH_SHORT).show();
-                            clearFormFields(editTextTitle, editTextDescription, editTextPrice);
-                            resetImageSelections();
-                        } else
-                            Toast.makeText(getContext(), "Response error !", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(getContext(), "Failure !", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
         });
     }
