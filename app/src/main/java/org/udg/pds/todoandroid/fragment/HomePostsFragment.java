@@ -63,6 +63,7 @@ public class HomePostsFragment extends Fragment {
         setupSearchViewAndBackArrow();
 
         return binding.getRoot();
+
     }
 
     private void setupSearchViewAndBackArrow() {
@@ -126,8 +127,11 @@ public class HomePostsFragment extends Fragment {
 
         Call<List<Post>> call;
 
-        if (query.isEmpty()) call = mTodoService.getPosts();
-        else call = mTodoService.getPostSearch(query);
+        if (query.isEmpty()) {
+            call = mTodoService.getPosts();
+        } else {
+            call = mTodoService.getPostSearch(query);
+        }
 
         call.enqueue(new Callback<List<Post>>() {
             @Override
@@ -150,6 +154,7 @@ public class HomePostsFragment extends Fragment {
         if (binding.swipeRefreshLayout.isRefreshing()) {
             binding.swipeRefreshLayout.setRefreshing(false);
         }
+
     }
 
     static class PostsViewHolder extends RecyclerView.ViewHolder {
@@ -196,7 +201,7 @@ public class HomePostsFragment extends Fragment {
             if (post.getImages() != null && !post.getImages().isEmpty()) {
                 Picasso.get().load(post.getImages().get(0)).into(holder.imageView);
             } else {
-                holder.imageView.setImageResource(R.drawable.all_posts_logo);
+                holder.imageView.setImageResource(R.drawable.painting);
             }
 
             holder.view.setOnClickListener(view -> {
@@ -207,6 +212,18 @@ public class HomePostsFragment extends Fragment {
                 }
                 context.startActivity(intent);
             });
+
+            /*
+            holder.titol.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(context, holder.titol.getText(), duration);
+                    toast.show();
+                }
+            });
+            */
+            // animate(holder);
         }
 
         @Override

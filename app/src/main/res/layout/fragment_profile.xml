@@ -1,302 +1,388 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:paddingBottom="25dp">
+    android:id="@+id/container"
+    tools:context=".fragment.ProfileFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <View
+        android:id="@+id/searchCircle1"
+        android:background="@drawable/search_circle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="-75dp"
+        app:layout_constraintStart_toStartOf="@id/searchBarRectangle1"
+        app:layout_constraintEnd_toStartOf="@id/searchBarRectangle1"
+        app:layout_constraintTop_toTopOf="@id/searchBarRectangle1"
+        app:layout_constraintBottom_toBottomOf="@id/searchBarRectangle1"/>
+
+    <View
+        android:id="@+id/searchCircle2"
+        android:background="@drawable/search_circle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="-75dp"
+        app:layout_constraintStart_toEndOf="@id/searchBarRectangle1"
+        app:layout_constraintEnd_toEndOf="@id/searchBarRectangle1"
+        app:layout_constraintTop_toTopOf="@id/searchBarRectangle1"
+        app:layout_constraintBottom_toBottomOf="@id/searchBarRectangle1"/>
+
+    <View
+        android:id="@+id/searchBarRectangle1"
+        android:background="@drawable/search_rectangle"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rectangle2"/>
+
+    <View
+        android:id="@+id/searchBarRectangle2"
+        android:background="#ffffff"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rectangle2"/>
+
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:autofillHints=""
+        android:background="@null"
+        android:hint="@string/search_bar_hint"
+        android:imeOptions="actionGo"
+        android:maxLines="1"
+        android:paddingStart="15dp"
+        android:textColorHint="#000000"
+        app:layout_constraintBottom_toBottomOf="@id/searchCircle1"
+        app:layout_constraintStart_toStartOf="@id/searchCircle1"
+        app:layout_constraintTop_toTopOf="@id/searchCircle1"
+        tools:ignore="RtlSymmetry,TouchTargetSizeCheck"/>
+
+    <Button
+        android:id="@+id/searchIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/search_bar_icon"
+        android:contentDescription="@string/search_bar"
+        app:layout_constraintBottom_toBottomOf="@id/searchCircle2"
+        app:layout_constraintEnd_toEndOf="@id/searchCircle2"
+        app:layout_constraintStart_toStartOf="@id/searchCircle2"
+        app:layout_constraintTop_toTopOf="@id/searchCircle2"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/settings_icon"
+        android:contentDescription="@string/settings"
+        app:layout_constraintEnd_toEndOf="@id/profileCircle2"
+        app:layout_constraintTop_toTopOf="@id/profileCircle2"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <View
+        android:id="@+id/profileCircle1"
+        android:background="@drawable/profile_circle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="-75dp"
+        app:layout_constraintStart_toStartOf="@id/rectangle2"
+        app:layout_constraintTop_toTopOf="@id/rectangle2"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
+
+    <View
+        android:id="@+id/rectangle2"
+        android:background="#d0f4fc"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:id="@+id/profileCircle2"
+        android:background="@drawable/profile_circle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="-75dp"
+        app:layout_constraintEnd_toEndOf="@id/rectangle2"
+        app:layout_constraintTop_toTopOf="@id/rectangle2"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePicture"
+        android:src="@drawable/default_pfp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="-75dp"
+        app:civ_border_color="#20cce4"
+        app:civ_border_width="5dp"
+        app:layout_constraintStart_toStartOf="@id/rectangle2"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle2"
+        app:layout_constraintTop_toTopOf="@id/rectangle2"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/container"
-        tools:context=".fragment.ProfileFragment">
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/default_name"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/rectangle2"
+        app:layout_constraintEnd_toEndOf="@id/rectangle2"
+        app:layout_constraintTop_toTopOf="@id/rectangle2"
+        tools:ignore="TextSizeCheck,VisualLintOverlap"/>
 
-        <View
-            android:id="@+id/searchCircle1"
-            android:background="@drawable/search_circle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="-75dp"
-            app:layout_constraintStart_toStartOf="@id/searchBarRectangle1"
-            app:layout_constraintEnd_toStartOf="@id/searchBarRectangle1"
-            app:layout_constraintTop_toTopOf="@id/searchBarRectangle1"
-            app:layout_constraintBottom_toBottomOf="@id/searchBarRectangle1"/>
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/default_username"
+        android:textColor="#666666"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintEnd_toEndOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:ignore="TextSizeCheck" />
 
-        <View
-            android:id="@+id/searchCircle2"
-            android:background="@drawable/search_circle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="-75dp"
-            app:layout_constraintStart_toEndOf="@id/searchBarRectangle1"
-            app:layout_constraintEnd_toEndOf="@id/searchBarRectangle1"
-            app:layout_constraintTop_toTopOf="@id/searchBarRectangle1"
-            app:layout_constraintBottom_toBottomOf="@id/searchBarRectangle1"/>
+    <ImageView
+        android:id="@+id/averageGlobalRatingStar"
+        app:srcCompat="@drawable/black_star"
+        android:contentDescription="@string/average_global_rating"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintStart_toStartOf="@id/rectangle2"
+        app:layout_constraintEnd_toEndOf="@id/rectangle2"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
 
-        <View
-            android:id="@+id/searchBarRectangle1"
-            android:background="@drawable/search_rectangle"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rectangle2"/>
+    <TextView
+        android:id="@+id/averageGlobalRating"
+        android:text="@string/default_rating"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="@id/averageGlobalRatingStar"
+        app:layout_constraintTop_toTopOf="@id/averageGlobalRatingStar"
+        app:layout_constraintBottom_toBottomOf="@id/averageGlobalRatingStar"/>
 
-        <View
-            android:id="@+id/searchBarRectangle2"
-            android:background="#ffffff"
-            android:layout_width="300dp"
-            android:layout_height="44dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rectangle2"/>
+    <TextView
+        android:id="@+id/globalAmountRatings"
+        android:text="@string/default_amount_ratings"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/averageGlobalRatingStar"
+        app:layout_constraintEnd_toEndOf="@id/averageGlobalRating"
+        app:layout_constraintTop_toBottomOf="@id/averageGlobalRatingStar"/>
 
-        <EditText
-            android:id="@+id/searchBar"
-            android:layout_width="300dp"
-            android:layout_height="44dp"
-            android:autofillHints=""
-            android:background="@null"
-            android:hint="@string/search_bar_hint"
-            android:imeOptions="actionGo"
-            android:maxLines="1"
-            android:paddingStart="15dp"
-            android:textColorHint="#000000"
-            app:layout_constraintBottom_toBottomOf="@id/searchCircle1"
-            app:layout_constraintStart_toStartOf="@id/searchCircle1"
-            app:layout_constraintTop_toTopOf="@id/searchCircle1"
-            tools:ignore="RtlSymmetry,TouchTargetSizeCheck"/>
+    <ImageView
+        android:id="@+id/locationIcon"
+        app:srcCompat="@drawable/location"
+        android:contentDescription="@string/location"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="60dp"
+        app:layout_constraintStart_toStartOf="@id/averageGlobalRatingStar"
+        app:layout_constraintTop_toTopOf="@id/averageGlobalRatingStar"
+        app:layout_constraintBottom_toBottomOf="@id/globalAmountRatings"/>
 
-        <Button
-            android:id="@+id/searchIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/search_bar_icon"
-            android:contentDescription="@string/search_bar"
-            app:layout_constraintBottom_toBottomOf="@id/searchCircle2"
-            app:layout_constraintEnd_toEndOf="@id/searchCircle2"
-            app:layout_constraintStart_toStartOf="@id/searchCircle2"
-            app:layout_constraintTop_toTopOf="@id/searchCircle2"
-            tools:ignore="TouchTargetSizeCheck" />
+    <TextView
+        android:id="@+id/country"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="@string/default_country"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/locationIcon"
+        app:layout_constraintStart_toStartOf="@id/locationIcon"
+        app:layout_constraintTop_toTopOf="@id/locationIcon"
+        tools:ignore="TextSizeCheck" />
 
-        <Button
-            android:id="@+id/settings"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/settings_icon"
-            android:contentDescription="@string/settings"
-            app:layout_constraintEnd_toEndOf="@id/profileCircle2"
-            app:layout_constraintTop_toTopOf="@id/profileCircle2"
-            tools:ignore="TouchTargetSizeCheck" />
+    <TextView
+        android:id="@+id/aboutMeTitle"
+        android:text="@string/about_me"
+        android:textSize="22sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-200dp"
+        android:layout_marginTop="160dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/profilePicture"/>
 
-        <View
-            android:id="@+id/profileCircle1"
-            android:background="@drawable/profile_circle"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="-75dp"
-            app:layout_constraintStart_toStartOf="@id/rectangle2"
-            app:layout_constraintTop_toTopOf="@id/rectangle2"
-            app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
+    <View
+        android:id="@+id/aboutMeLine"
+        android:background="#666666"
+        android:layout_width="325dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/aboutMeTitle" />
 
-        <View
-            android:id="@+id/rectangle2"
-            android:background="#d0f4fc"
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/aboutMeDescription"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/default_about_me_description"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/aboutMeLine"
+        tools:ignore="TextSizeCheck" />
 
-        <View
-            android:id="@+id/profileCircle2"
-            android:background="@drawable/profile_circle"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginEnd="-75dp"
-            app:layout_constraintEnd_toEndOf="@id/rectangle2"
-            app:layout_constraintTop_toTopOf="@id/rectangle2"
-            app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
+    <TextView
+        android:id="@+id/myServicesTitle"
+        android:text="@string/my_services"
+        android:textSize="22sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@id/aboutMeTitle"
+        app:layout_constraintTop_toBottomOf="@id/aboutMeDescription"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilePicture"
-            android:src="@drawable/default_pfp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="-75dp"
-            app:civ_border_color="#20cce4"
-            app:civ_border_width="5dp"
-            app:layout_constraintStart_toStartOf="@id/rectangle2"
-            app:layout_constraintBottom_toBottomOf="@id/rectangle2"
-            app:layout_constraintTop_toTopOf="@id/rectangle2"
-            tools:ignore="ImageContrastCheck" />
+    <View
+        android:id="@+id/myServicesLine"
+        android:background="#666666"
+        android:layout_width="325dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/myServicesTitle"/>
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="125dp"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="@string/default_name"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="@id/rectangle2"
-            app:layout_constraintEnd_toEndOf="@id/rectangle2"
-            app:layout_constraintTop_toTopOf="@id/rectangle2"
-            tools:ignore="TextSizeCheck,VisualLintOverlap"/>
+    <View
+        android:id="@+id/Service1"
+        android:background="@drawable/rounded_rectangle"
+        android:layout_width="325dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/myServicesLine"/>
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/default_username"
-            android:textColor="#666666"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@id/name"
-            app:layout_constraintEnd_toEndOf="@id/name"
-            app:layout_constraintTop_toBottomOf="@id/name"
-            tools:ignore="TextSizeCheck" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/Service1_Logo"
+        android:src="@drawable/painting"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:civ_border_color="#20cce4"
+        app:civ_border_width="3dp"
+        app:layout_constraintStart_toStartOf="@id/Service1"
+        app:layout_constraintTop_toTopOf="@id/Service1"
+        tools:ignore="ImageContrastCheck"/>
 
-        <ImageView
-            android:id="@+id/averageGlobalRatingStar"
-            app:srcCompat="@drawable/black_star"
-            android:contentDescription="@string/average_global_rating"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="40dp"
-            app:layout_constraintStart_toStartOf="@id/rectangle2"
-            app:layout_constraintEnd_toEndOf="@id/rectangle2"
-            app:layout_constraintBottom_toBottomOf="@id/rectangle2"/>
+    <TextView
+        android:id="@+id/Service1_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder1"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/Service1_Logo"
+        app:layout_constraintEnd_toEndOf="@id/Service1"
+        app:layout_constraintTop_toTopOf="@id/Service1"
+        tools:ignore="TextSizeCheck" />
 
-        <TextView
-            android:id="@+id/averageGlobalRating"
-            android:text="@string/default_rating"
-            android:textSize="15sp"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            app:layout_constraintStart_toStartOf="@id/averageGlobalRatingStar"
-            app:layout_constraintTop_toTopOf="@id/averageGlobalRatingStar"
-            app:layout_constraintBottom_toBottomOf="@id/averageGlobalRatingStar"/>
+    <View
+        android:id="@+id/Service1_Line"
+        android:background="#aaaaaa"
+        android:layout_width="200dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/Service1_Title"
+        app:layout_constraintEnd_toEndOf="@id/Service1_Title"
+        app:layout_constraintTop_toTopOf="@id/Service1_Title"/>
 
-        <TextView
-            android:id="@+id/globalAmountRatings"
-            android:text="@string/default_amount_ratings"
-            android:textSize="15sp"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/averageGlobalRatingStar"
-            app:layout_constraintEnd_toEndOf="@id/averageGlobalRating"
-            app:layout_constraintTop_toBottomOf="@id/averageGlobalRatingStar"/>
+    <TextView
+        android:id="@+id/Service1_Description"
+        android:layout_width="200dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/placeholder2"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/Service1_Line"
+        app:layout_constraintStart_toStartOf="@id/Service1_Line"
+        app:layout_constraintTop_toTopOf="@id/Service1_Line"
+        tools:ignore="TextSizeCheck" />
 
-        <ImageView
-            android:id="@+id/locationIcon"
-            app:srcCompat="@drawable/location"
-            android:contentDescription="@string/location"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="60dp"
-            app:layout_constraintStart_toStartOf="@id/averageGlobalRatingStar"
-            app:layout_constraintTop_toTopOf="@id/averageGlobalRatingStar"
-            app:layout_constraintBottom_toBottomOf="@id/globalAmountRatings"/>
+    <ImageView
+        android:id="@+id/Service1_averageRatingStar"
+        app:srcCompat="@drawable/black_star"
+        android:contentDescription="@string/placeholder3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="-25dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintStart_toStartOf="@id/Service1_Logo"
+        app:layout_constraintEnd_toEndOf="@id/Service1_Logo"
+        app:layout_constraintBottom_toBottomOf="@id/Service1"/>
 
-        <TextView
-            android:id="@+id/country"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text="@string/default_country"
-            android:textColor="#000000"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@id/locationIcon"
-            app:layout_constraintStart_toStartOf="@id/locationIcon"
-            app:layout_constraintTop_toTopOf="@id/locationIcon"
-            tools:ignore="TextSizeCheck" />
+    <TextView
+        android:id="@+id/Service1_averageRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="@string/default_rating"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/Service1_averageRatingStar"
+        app:layout_constraintTop_toTopOf="@id/Service1_averageRatingStar"
+        app:layout_constraintBottom_toBottomOf="@id/Service1_averageRatingStar"/>
 
-        <TextView
-            android:id="@+id/aboutMeTitle"
-            android:text="@string/about_me"
-            android:textSize="22sp"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="-200dp"
-            android:layout_marginTop="160dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/profilePicture"/>
+    <TextView
+        android:id="@+id/Service1_amountRatings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_amount_ratings"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/Service1_averageRatingStar"
+        app:layout_constraintEnd_toEndOf="@id/Service1_averageRating"
+        app:layout_constraintTop_toBottomOf="@id/Service1_averageRatingStar"/>
 
-        <View
-            android:id="@+id/aboutMeLine"
-            android:background="#666666"
-            android:layout_width="325dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/aboutMeTitle" />
+    <Button
+        android:id="@+id/boto_meus_posts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Meus Posts"
+        app:layout_constraintStart_toStartOf="@+id/Service1"
+        app:layout_constraintTop_toBottomOf="@+id/Service1"/>
 
-        <TextView
-            android:id="@+id/aboutMeDescription"
-            android:layout_width="325dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/default_about_me_description"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/aboutMeLine"
-            tools:ignore="TextSizeCheck" />
-
-        <TextView
-            android:id="@+id/myServicesTitle"
-            android:text="@string/my_services"
-            android:textSize="22sp"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="@id/aboutMeTitle"
-            app:layout_constraintTop_toBottomOf="@id/aboutMeDescription"/>
-
-        <View
-            android:id="@+id/myServicesLine"
-            android:background="#666666"
-            android:layout_width="325dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/myServicesTitle"/>
-
-        <TextView
-            android:id="@+id/noServices"
-            android:layout_width="325dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/default_no_services"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/myServicesLine"
-            tools:ignore="TextSizeCheck" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
