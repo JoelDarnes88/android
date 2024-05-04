@@ -1,8 +1,7 @@
 package org.udg.pds.todoandroid.rest;
 
-import org.udg.pds.todoandroid.entity.IdObject;
 import org.udg.pds.todoandroid.entity.PaymentResponse;
-import org.udg.pds.todoandroid.entity.Task;
+import org.udg.pds.todoandroid.entity.Servei;
 import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.entity.UserModify;
 import org.udg.pds.todoandroid.entity.UserRegister;
@@ -43,65 +42,61 @@ public interface TodoApi {
 
     @GET("/users/check")
     Call<String> check();
+
     @GET("/users/getPaymentMethod")
     Call<PaymentResponse> getPaymentMethod();
 
     @POST("/users/modify")
     Call<Void> modify(@Body UserModify modify);
 
-    @DELETE("/users/{id}")
-    Call<Void> deleteAccount(@Path("id") String userId);
-
-    @POST("/tasks")
-    Call<IdObject> addTask(@Body Task task);
-
-    @GET("/tasks")
-    Call<List<Task>> getTasks();
-
-    @GET("/tasks/{id}")
-    Call<Task> getTask(@Path("id") String id);
+    @DELETE("/users/{userId}")
+    Call<Void> deleteAccount(@Path("userId") String userId);
 
     @POST("/images")
     @Multipart
     Call<String> uploadImage(@Part MultipartBody.Part file);
 
-    @POST("/posts/post")
-    Call<ResponseBody> addPost(@Body Post post);
-
     @GET("/posts")
     Call<List<Post>> getPosts();
-
-    @GET("/posts/me")
-    Call<List<Post>> getMeusPosts();
-
-    @GET("/posts/{id}")
-    Call<Post> getPostId(@Path("id") String id);
-
-    @DELETE("posts/{id}")
-    Call<Void> deletePost(@Path("id") String postId);
-
-    @PUT("/posts/{id}")
-    Call<Void> updatePost(@Path("id") String postId, @Body Post post);
 
     @GET("/posts/search")
     Call<List<Post>> getPostSearch(@Query("query") String query);
 
+    @GET("/posts/{postId}")
+    Call<Post> getPostId(@Path("postId") String postId);
+
+    @GET("/posts/user/{userId}")
+    Call<List<Post>> getUserPosts(@Path("userId") String userId);
+
+    @GET("/posts/user/{userId}/servei/{serviceId}")
+    Call<List<Post>> getUserServicePosts(@Path("userId") String userId, @Path("serviceId") String serviceId);
+
     @Multipart
     @POST("/posts/postImage")
-    Call<ResponseBody> addPostImages(@Part("titol") RequestBody titol,
+    Call<Void> addPostImages(@Part("titol") RequestBody titol,
                                     @Part("descripcio") RequestBody descripcio,
                                     @Part("preu") RequestBody preu,
-                                    @Part List<MultipartBody.Part> files);
+                                    @Part("nomServei") RequestBody nomServei/*,
+                                    @Part List<MultipartBody.Part> files*/);
 
     @Multipart
     @PUT("/posts/updatePostImage/{postId}")
-    Call<ResponseBody> updatePostImage(
+    Call<Void> updatePostImage(
         @Path("postId") String postId,
         @Part("titol") RequestBody titol,
         @Part("descripcio") RequestBody descripcio,
         @Part("preu") RequestBody preu,
-        @Part("urlsToDel") List<String> urlsToDel,
-        @Part List<MultipartBody.Part> files);
+        @Part("nomServei") RequestBody nomServei,
+        @Part("urlsToDel") List<String> urlsToDel/*,
+        @Part List<MultipartBody.Part> files*/);
+    
+    @DELETE("/posts/{postId}")
+    Call<Void> deletePost(@Path("postId") String postId);
 
+    @GET("/services")
+    Call<List<Servei>> getServices();
+
+    @GET("/services/user/{userId}")
+    Call<List<Servei>> getServicesUser(@Path("userId") String userId);
 }
 
