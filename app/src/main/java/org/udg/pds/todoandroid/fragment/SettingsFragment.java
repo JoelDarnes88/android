@@ -8,21 +8,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
 import org.udg.pds.todoandroid.databinding.ContentSettingsBinding;
 import org.udg.pds.todoandroid.activity.LogOut;
-import org.udg.pds.todoandroid.entity.Post;
+import org.udg.pds.todoandroid.entity.PaymentResponse;
 import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.entity.UserModify;
 import org.udg.pds.todoandroid.rest.TodoApi;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +59,58 @@ public class SettingsFragment extends Fragment {
             AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
         });
 
+        // View spinner_view = inflater.inflate(R.layout.content_settings, container, false);
+        Spinner spinner = (Spinner) binding.spinnerPaymentMethod;
+        // Create an ArrayAdapter using the string array and a default spinner layout.
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+            container.getContext(),
+            R.array.payment_methods,
+            android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mTodoService = ((TodoApp) getActivity().getApplication()).getAPI();
+        Call<PaymentResponse> callPaymentMethod = mTodoService.getPaymentMethod();
+        callPaymentMethod.enqueue(new Callback<PaymentResponse>() {
+            @Override
+            public void onResponse(Call<PaymentResponse> callPaymentMethod, Response<PaymentResponse> response) {
+                if(response.body() == null) Toast.makeText(getContext(), "malas noticias", Toast.LENGTH_LONG).show();
+                if (response.isSuccessful()) {
+                    String paymentMethod = response.body().getPaymentMethod();
+                    spinner.setAdapter(adapter);
+                    if(paymentMethod.equals("Visa")) spinner.setSelection(0);
+                    else if(paymentMethod.equals("Paypal")) spinner.setSelection(1);
+                    else if(paymentMethod.equals("Google Pay")) spinner.setSelection(2);
+
+                } else {
+                    Toast.makeText(getContext(), "Error reconeixent quin mètode de pagament s'usa", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PaymentResponse> callPaymentMethod, Throwable t) {
+                // spinner.setSelection(0);
+                Toast.makeText(getContext(), "Fallada: " + t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+        final String[] opcioSeleccionada = {"Visa"};
+
+        binding.spinnerPaymentMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Obtenemos la opción seleccionada utilizando la posición
+                opcioSeleccionada[0] = parentView.getItemAtPosition(position).toString();
+
+                // Ahora puedes hacer lo que quieras con la opción seleccionada, por ejemplo, mostrarla en un Toast
+                //Toast.makeText(getContext(), "Seleccionaste: " + opcioSeleccionada, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                Toast.makeText(getContext(), "Cap opció està seleccionada", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         binding.btnSaveChanges.setOnClickListener(v -> {
             mTodoService = ((TodoApp) getActivity().getApplication()).getAPI();
             String newUsername = binding.editTextChangeUsername.getText().toString();
@@ -66,11 +120,12 @@ public class SettingsFragment extends Fragment {
             String newPhoneNumber = binding.editTextChangePhoneNumber.getText().toString();
             String newPassword = binding.editTextChangePassword.getText().toString();
             String newAboutMe = binding.editTextChangeAboutMe.getText().toString();
+            String paymentMethod = opcioSeleccionada[0];
 
-            Call<User> call = mTodoService.modify(new UserModify(newUsername,newName,newCountry,newEmail,newPhoneNumber,newPassword,newAboutMe));
-            call.enqueue(new Callback<User>() {
+            Call<Void> call = mTodoService.modify(new UserModify(newUsername,newName,newCountry,newEmail,newPhoneNumber,newPassword,newAboutMe,paymentMethod));
+            call.enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<User> call, Response<User> response) {
+                public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(getContext(), "Dades personals actualitzades", Toast.LENGTH_LONG).show();
                         binding.editTextChangeUsername.setText("");
@@ -81,7 +136,7 @@ public class SettingsFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<User> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     Toast.makeText(getContext(), "Fallada modificant les dades personals: " + t.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
@@ -90,8 +145,6 @@ public class SettingsFragment extends Fragment {
             editor.putString("username", newUsername);
             editor.putString("password", newPassword);
             editor.apply();
-
-            Toast.makeText(getActivity(), "Cambios guardados", Toast.LENGTH_SHORT).show();
         });
 
         binding.btnLogout.setOnClickListener(view -> {

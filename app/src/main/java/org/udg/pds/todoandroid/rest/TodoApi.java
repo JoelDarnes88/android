@@ -1,6 +1,7 @@
 package org.udg.pds.todoandroid.rest;
 
 import org.udg.pds.todoandroid.entity.IdObject;
+import org.udg.pds.todoandroid.entity.PaymentResponse;
 import org.udg.pds.todoandroid.entity.Task;
 import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.entity.UserModify;
@@ -42,9 +43,11 @@ public interface TodoApi {
 
     @GET("/users/check")
     Call<String> check();
+    @GET("/users/getPaymentMethod")
+    Call<PaymentResponse> getPaymentMethod();
 
     @POST("/users/modify")
-    Call<User> modify(@Body UserModify modify);
+    Call<Void> modify(@Body UserModify modify);
 
     @DELETE("/users/{id}")
     Call<Void> deleteAccount(@Path("id") String userId);

@@ -27,8 +27,10 @@ public class UserModify{
 
     @JsonProperty("about_me")
     public String aboutMe;
+    @JsonProperty("payment_method")
+    public String paymentMethod;
 
-    public UserModify(String username, String name, String country, String email, String phoneNumber, String password, String aboutMe) {
+    public UserModify(String username, String name, String country, String email, String phoneNumber, String password, String aboutMe, String paymentMethod) {
         this.username = username;
         this.name = name;
         this.country = country;
@@ -36,6 +38,7 @@ public class UserModify{
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.aboutMe = aboutMe;
+        this.paymentMethod = paymentMethod;
     }
 
     public String getUsername() {
