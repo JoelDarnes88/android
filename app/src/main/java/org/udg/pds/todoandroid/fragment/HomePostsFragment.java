@@ -201,7 +201,7 @@ public class HomePostsFragment extends Fragment {
             if (post.getImages() != null && !post.getImages().isEmpty()) {
                 Picasso.get().load(post.getImages().get(0)).into(holder.imageView);
             } else {
-                holder.imageView.setImageResource(R.drawable.all_posts_logo);
+                holder.imageView.setImageResource(R.drawable.painting);
             }
 
             holder.view.setOnClickListener(view -> {

@@ -13,28 +13,29 @@ import java.util.List;
     property = "id", scope = Post.class)
 public class Post {
     public Long id;
-
     @JsonProperty("titol")
     public String titol;
-
-    @JsonProperty("descripcio")
-    public String descripcio;
-
     @JsonProperty("preu")
     public Double preu;
+    @JsonProperty("descripcio")
+    public String descripcio;
+    public User creador;
+    private List<String> images;
+    @JsonProperty("userId")
+    public Long userId;
 
     @JsonProperty("user")
     public User user;
 
-    private List<String> images;
 
     public Post() {}
 
-    public Post(String title, String description, double price, User user) {
+    public Post(String title, String description, double price, User user, Long userId) {
         this.titol = title;
         this.descripcio = description;
         this.preu = price;
         this.user = user;
+        this.userId = userId;
     }
 
     public Post(String title, String description, double price) {
@@ -47,6 +48,10 @@ public class Post {
     // Getters y Setters
     public Long getId() {
         return id;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     public String getTitol() {
