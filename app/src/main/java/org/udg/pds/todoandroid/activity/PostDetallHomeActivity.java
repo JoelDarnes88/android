@@ -70,6 +70,7 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         ViewPager2 viewPager = findViewById(R.id.post_item_image);
 
         User u = p.getUser();
+        Long userID = p.getUserId();
 
         titol.setText(p.getTitol());
         descripcio.setText(p.getDescripcio());

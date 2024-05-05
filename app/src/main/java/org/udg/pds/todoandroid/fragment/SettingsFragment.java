@@ -25,8 +25,6 @@ import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.entity.UserModify;
 import org.udg.pds.todoandroid.rest.TodoApi;
 
-import java.util.Objects;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -147,7 +145,6 @@ public class SettingsFragment extends Fragment {
             editor.putString("username", newUsername);
             editor.putString("password", newPassword);
             editor.apply();
-            changeLoggedUser(newUsername, newName, newCountry, newEmail, newPhoneNumber, newPassword, newAboutMe);
         });
 
         binding.btnLogout.setOnClickListener(view -> {
@@ -179,18 +176,5 @@ public class SettingsFragment extends Fragment {
         });
 
         return binding.getRoot();
-    }
-
-    private void changeLoggedUser(String username, String name, String country, String email, String phoneNumber, String password, String aboutMe){
-        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(!Objects.equals(username, "")) editor.putString("username", username);
-        if(!Objects.equals(name, "")) editor.putString("name", name);
-        if(!Objects.equals(country, "")) editor.putString("country", country);
-        if(!Objects.equals(email, "")) editor.putString("email", email);
-        if(!Objects.equals(phoneNumber, "")) editor.putString("phoneNumber", phoneNumber);
-        if(!Objects.equals(password, "")) editor.putString("password", password);
-        if(!Objects.equals(country, "")) editor.putString("aboutMe", aboutMe);
-        editor.apply();
     }
 }
