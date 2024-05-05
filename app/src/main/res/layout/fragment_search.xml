@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:id="@+id/container"
-    tools:context=".fragment.SearchFragment">
+    tools:context=".fragment.SearchFragment"
+    android:paddingBottom="25dp">
 
     <View
         android:id="@+id/searchCircle1"
