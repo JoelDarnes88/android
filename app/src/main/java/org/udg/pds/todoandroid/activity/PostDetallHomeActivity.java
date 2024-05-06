@@ -125,7 +125,6 @@ public class PostDetallHomeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(PostDetallHomeActivity.this, "Bool:" + response.body().toString(), Toast.LENGTH_SHORT).show();
                     ImageView imgButton = (ImageView) PostDetallHomeActivity.this.findViewById(R.id.favorite_icon);
                     isFavourite = response.body();
                     if(isFavourite) imgButton.setImageResource(R.drawable.star_filled);
