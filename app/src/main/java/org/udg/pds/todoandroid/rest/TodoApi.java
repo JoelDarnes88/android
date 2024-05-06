@@ -1,6 +1,8 @@
 package org.udg.pds.todoandroid.rest;
 
+import org.udg.pds.todoandroid.entity.Chat;
 import org.udg.pds.todoandroid.entity.IdObject;
+import org.udg.pds.todoandroid.entity.Message;
 import org.udg.pds.todoandroid.entity.PaymentResponse;
 import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.entity.UserModify;
@@ -99,5 +101,12 @@ public interface TodoApi {
 
     @GET("/services/user/{userId}")
     Call<List<Servei>> getServicesUser(@Path("userId") String userId);
+
+    @GET("/chats/user/me")
+    Call<List<Chat>> getMeusChats();
+
+    @GET("chats/{chatId}/messages")
+    Call<List<Message>> getChatMessages(@Path("chatId") Long chatId);
+
 }
 
