@@ -25,7 +25,7 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewH
         this.imageUrls = imageUrls;
         if (imageUrls == null || imageUrls.isEmpty()) {
             this.imageUrls = new ArrayList<>();
-            this.imageUrls.add("android.resource://org.udg.pds.todoandroid/drawable/painting");
+            this.imageUrls.add("android.resource://org.udg.pds.todoandroid/drawable/all_posts_logo");
         }
     }
 
