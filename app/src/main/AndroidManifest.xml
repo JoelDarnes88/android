@@ -12,9 +12,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.ChatMessagesActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.EditarPostActivity"
             android:exported="false" />
         <activity

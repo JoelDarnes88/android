@@ -14,11 +14,11 @@
         android:title="@string/crear_post"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/chatsFragment"
+        android:id="@+id/action_image"
         android:checked="true"
         android:enabled="true"
-        android:icon="@drawable/mensajes"
-        android:title="@string/chat"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="@string/text_image"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/profileFragment"

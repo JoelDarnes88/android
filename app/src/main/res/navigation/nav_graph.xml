@@ -48,8 +48,4 @@
         android:name="org.udg.pds.todoandroid.fragment.SearchFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search"/>
-    <fragment
-        android:id="@+id/chatsFragment"
-        android:name="org.udg.pds.todoandroid.fragment.ChatsFragment"
-        android:label="ChatsFragment" />
 </navigation>
