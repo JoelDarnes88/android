@@ -44,16 +44,7 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         findViewById(R.id.favorite_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView favoriteIcon = (ImageView) view;
-                if(isFavourite){
-                    isFavourite = false;
-                    changeFavourite(post_id, false);
-                    favoriteIcon.setImageResource(R.drawable.star_not_filled);
-                } else{
-                    isFavourite= true;
-                    changeFavourite(post_id, true);
-                    favoriteIcon.setImageResource(R.drawable.star_filled);
-                }
+                changeFavourite(post_id);
             }
         });
     }
@@ -88,10 +79,7 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         ImageView favoriteIcon = findViewById(R.id.favorite_icon);
 
         post_id = p.getId();
-        //isFavourite(post_id);
-
-        if(isFavourite) favoriteIcon.setImageResource(R.drawable.star_filled);
-        else favoriteIcon.setImageResource(R.drawable.star_not_filled);
+        isFavourite(post_id);
 
         User u = p.getUser();
 
@@ -104,14 +92,21 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    private void changeFavourite(Long post_id, boolean addToFavourites){
-        Call<Void> call = mApiService.changeFavourite(post_id, addToFavourites);
+    private void changeFavourite(Long post_id){
+        Call<Void> call = mApiService.changeFavourite(post_id, !isFavourite);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    if(addToFavourites) Toast.makeText(PostDetallHomeActivity.this, "Post afegit a preferits", Toast.LENGTH_SHORT).show();
-                    else Toast.makeText(PostDetallHomeActivity.this, "Post tret de preferits", Toast.LENGTH_SHORT).show();
+                    ImageView imgButton = (ImageView) PostDetallHomeActivity.this.findViewById(R.id.favorite_icon);
+                    if(isFavourite){
+                        imgButton.setImageResource(R.drawable.star_not_filled);
+                        Toast.makeText(PostDetallHomeActivity.this, "Post tret de preferits", Toast.LENGTH_SHORT).show();
+                    } else{
+                        imgButton.setImageResource(R.drawable.star_filled);
+                        Toast.makeText(PostDetallHomeActivity.this, "Post afegit a preferits", Toast.LENGTH_SHORT).show();
+                    }
+                    isFavourite = !isFavourite;
                 } else {
                     Toast.makeText(PostDetallHomeActivity.this, "Error a l'hora de modificar el post de preferits", Toast.LENGTH_SHORT).show();
                 }
@@ -131,7 +126,10 @@ public class PostDetallHomeActivity extends AppCompatActivity {
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(PostDetallHomeActivity.this, "Bool:" + response.body().toString(), Toast.LENGTH_SHORT).show();
+                    ImageView imgButton = (ImageView) PostDetallHomeActivity.this.findViewById(R.id.favorite_icon);
                     isFavourite = response.body();
+                    if(isFavourite) imgButton.setImageResource(R.drawable.star_filled);
+                    else imgButton.setImageResource(R.drawable.star_not_filled);
                 } else {
                     Toast.makeText(PostDetallHomeActivity.this, "Error a l'hora de saber si el post és de preferits", Toast.LENGTH_SHORT).show();
                 }
