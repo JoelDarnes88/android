@@ -32,7 +32,7 @@ public class PostDetallHomeActivity extends AppCompatActivity {
     TodoApi mApiService;
 
     Long post_id;
-    Boolean isFavourite;
+    Boolean isFavourite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +88,13 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         ImageView favoriteIcon = findViewById(R.id.favorite_icon);
 
         post_id = p.getId();
-        isFavourite(post_id);
+        //isFavourite(post_id);
 
         if(isFavourite) favoriteIcon.setImageResource(R.drawable.star_filled);
         else favoriteIcon.setImageResource(R.drawable.star_not_filled);
 
         User u = p.getUser();
-        Long userID = p.getUserId();
+
         titol.setText(p.getTitol());
         descripcio.setText(p.getDescripcio());
         preu.setText(String.format(Locale.getDefault(), "$%.2f", p.getPreu()));

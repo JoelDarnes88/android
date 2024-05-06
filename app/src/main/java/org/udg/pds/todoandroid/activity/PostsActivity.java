@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.SharedPreferences;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,19 +22,19 @@ import com.squareup.picasso.Picasso;
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
 import org.udg.pds.todoandroid.databinding.ActivityMeusPostsBinding;
-import org.udg.pds.todoandroid.databinding.FragmentHomePostsBinding;
 import org.udg.pds.todoandroid.entity.Post;
-import org.udg.pds.todoandroid.fragment.HomePostsFragment;
 import org.udg.pds.todoandroid.rest.TodoApi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MeusPostsActivity extends AppCompatActivity {
+public class PostsActivity extends AppCompatActivity {
+    public static final String SHARED_PREFS_KEY = "loggedUser";
 
     TodoApi mTodoService;
     RecyclerView recyclerView;
@@ -69,7 +71,16 @@ public class MeusPostsActivity extends AppCompatActivity {
     }
 
     public void updatePostList() {
-        Call<List<Post>> call = mTodoService.getMeusPosts();
+        String userId;
+        Intent intent = getIntent();
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
+        if(intent != null && intent.hasExtra("userId")) userId = (String) intent.getSerializableExtra("userId");
+        else userId = sharedPreferences.getString("id", "");
+
+        Call<List<Post>> call = null;
+        if(intent != null && intent.hasExtra("serviceId")) call = mTodoService.getUserServicePosts(userId, (String) intent.getSerializableExtra("serviceId"));
+        else call = mTodoService.getUserPosts(userId);
+
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -78,7 +89,7 @@ public class MeusPostsActivity extends AppCompatActivity {
                     adapter.setPosts(posts);
                 } else {
                     adapter.setPosts(new ArrayList<>());
-                    Toast.makeText(MeusPostsActivity.this, "No tens cap post", Toast.LENGTH_LONG).show();
+                    Toast.makeText(PostsActivity.this, "No tens cap post", Toast.LENGTH_LONG).show();
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -86,8 +97,8 @@ public class MeusPostsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
-                Log.e("MeusPostsActivity", "Error al cargar los posts", t);
-                Toast.makeText(MeusPostsActivity.this, "Error en la red", Toast.LENGTH_LONG).show();
+                Log.e("PostsActivity", "Error al cargar los posts", t);
+                Toast.makeText(PostsActivity.this, "Error en la red", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -137,11 +148,15 @@ public class MeusPostsActivity extends AppCompatActivity {
             if (!post.getImages().isEmpty()) {
                 Picasso.get().load(post.getImages().get(0)).into(holder.imageView);
             } else {
-                holder.imageView.setImageResource(R.drawable.painting);
+                holder.imageView.setImageResource(R.drawable.all_posts_logo);
             }
 
             holder.itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(MeusPostsActivity.this, MeusPostsDetallActivity.class);
+                Intent intent;
+                Intent intent1 = getIntent();
+                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
+                if(intent1 != null && intent1.hasExtra("userId") && !Objects.equals((String) intent1.getSerializableExtra("userId"), sharedPreferences.getString("id", ""))) intent = new Intent(PostsActivity.this, PostDetallHomeActivity.class);
+                else intent = new Intent(PostsActivity.this, MeusPostsDetallActivity.class);
                 intent.putExtra("POST_ID", String.valueOf(post.getId()));
                 startActivity(intent);
             });
@@ -171,5 +186,4 @@ public class MeusPostsActivity extends AppCompatActivity {
             notifyItemRangeRemoved(0, size);
         }
     }
-
 }
