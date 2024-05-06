@@ -52,6 +52,12 @@ public interface TodoApi {
     @POST("/users/modify")
     Call<Void> modify(@Body UserModify modify);
 
+    @POST("/users/changeFavourites/{post_id}")
+    Call<Void> changeFavourite(@Path("post_id") Long post_id, @Body Boolean addToFavourites);
+
+    @GET("/users/isFavourite/{post_id}")
+    Call<Boolean> isFavourite(@Path("post_id") Long post_id);
+
     @DELETE("/users/{id}")
     Call<Void> deleteAccount(@Path("id") String userId);
 
