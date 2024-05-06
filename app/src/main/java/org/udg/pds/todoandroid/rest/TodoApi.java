@@ -114,5 +114,9 @@ public interface TodoApi {
     @GET("chats/{chatId}/messages")
     Call<List<Message>> getChatMessages(@Path("chatId") Long chatId);
 
+    @POST("chats/{chatId}/send")
+    Call<Message> sendMessage(@Path("chatId") Long chatId, @Query("senderId") Long senderId, @Query("content") String content);
+
+
 }
 
