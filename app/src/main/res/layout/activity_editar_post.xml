@@ -11,7 +11,7 @@
         android:id="@+id/editTextTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:hint="Títol"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -21,6 +21,7 @@
         android:id="@+id/editTextDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Descripció"
         app:layout_constraintTop_toBottomOf="@id/editTextTitle"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -30,13 +31,21 @@
         android:id="@+id/editTextPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Preu"
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/editTextDescription"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-
+    <Spinner
+        android:id="@+id/spinnerServei"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrice"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -46,7 +55,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrice">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerServei">
 
         <ImageView
             android:id="@+id/editImagePreview1"
