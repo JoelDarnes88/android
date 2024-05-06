@@ -92,6 +92,7 @@ public class ProfileFragment extends Fragment {
                 if (response.isSuccessful()) {
                     List<Servei> serviceList = response.body();
                     ConstraintLayout serviceContainer = layout.findViewById(R.id.container);
+
                     if(serviceList.size() < 1) {
                         TextView noServicesTV = layout.findViewById(R.id.noServices);
                         noServicesTV.setVisibility(View.VISIBLE);
