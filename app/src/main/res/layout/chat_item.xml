@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/colorText"
             android:maxLines="1"
             android:ellipsize="end"
             android:paddingBottom="4dp"/>
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/darker_gray"
+            android:textColor="@color/gray"
             android:maxLines="2"
             android:ellipsize="end"/>
 

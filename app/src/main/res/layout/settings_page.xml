@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/colorBackground">
 
     <TextView
         android:id="@+id/textView_general_settings"
@@ -12,6 +13,7 @@
         android:text="Configuració General"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/colorText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -22,6 +24,7 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:text="Habilita Notificacions"
+        android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_general_settings" />
@@ -32,6 +35,7 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:text="Mode Fosc"
+        android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/switch_notifications" />
@@ -43,6 +47,7 @@
         android:text="Configuració del Compte"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/colorText"
         app:layout_constraintTop_toBottomOf="@id/switch_dark_mode"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +60,8 @@
         android:hint="Nom d'usuari nou"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColor="@color/colorText"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_account_settings" />
@@ -66,6 +73,8 @@
         android:hint="Contrasenya nova"
         android:inputType="textPassword"
         android:minHeight="48dp"
+        android:textColor="@color/colorText"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editText_change_username" />
@@ -75,6 +84,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Desa Canvis"
+        android:textColor="@color/colorTextLight"
+        android:background="@drawable/rounded_button"
         app:layout_constraintTop_toBottomOf="@id/editText_change_password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +96,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Tanca Sessió"
+        android:textColor="@color/colorTextLight"
+        android:background="@drawable/rounded_button"
         app:layout_constraintTop_toBottomOf="@id/btn_save_changes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

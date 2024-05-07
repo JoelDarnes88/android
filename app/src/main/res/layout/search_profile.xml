@@ -124,6 +124,6 @@
         app:layout_constraintStart_toStartOf="@id/profileRectangle"
         app:layout_constraintEnd_toEndOf="@id/profileRectangle"
         app:layout_constraintTop_toTopOf="@id/profileRectangle"
-        app:layout_constraintBottom_toBottomOf="@id/profileRectangle"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

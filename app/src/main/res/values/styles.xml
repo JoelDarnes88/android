@@ -1,12 +1,8 @@
 <resources>
     <style name="AppTheme.Base" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#3F51B5</item>
-        <!-- Light Indigo -->
-        <item name="colorPrimaryDark">#3949AB</item>
-        <!-- Dark Indigo -->
-        <item name="colorAccent">#00B0FF</item>
-        <!-- Blue -->
+        <item name="colorPrimary">#003366</item> <!-- Dark Blue -->
+        <item name="colorPrimaryDark">#002244</item> <!-- Even Darker Blue for status bar etc. -->
+        <item name="colorAccent">#3399ff</item> <!-- Light Blue -->
     </style>
 
     <style name="AppTheme" parent="AppTheme.Base"></style>
@@ -24,6 +20,6 @@
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+        <item name="android:background">#aa003366</item>
     </style>
 </resources>

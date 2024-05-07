@@ -110,9 +110,10 @@
         android:layout_height="150dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/service_button"
-        app:layout_constraintStart_toStartOf="@id/serviceRectangle"
+        app:layout_constraintBottom_toBottomOf="@id/serviceRectangle"
         app:layout_constraintEnd_toEndOf="@id/serviceRectangle"
+        app:layout_constraintStart_toStartOf="@id/serviceRectangle"
         app:layout_constraintTop_toTopOf="@id/serviceRectangle"
-        app:layout_constraintBottom_toBottomOf="@id/serviceRectangle"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
