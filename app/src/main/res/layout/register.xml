@@ -1,64 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="50dp">
+    android:padding="24dp"
+    android:background="@color/colorBackground">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:src="@drawable/icon"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:maxWidth="200dp"
-        android:maxHeight="200dp"/>
+        android:adjustViewBounds="true"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nom App"
+        android:text="SolveNet"
         android:id="@+id/title_text_view"
         android:layout_gravity="center_horizontal"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        android:textColor="#000000"/>
+        android:textColor="@color/colorPrimary"/>
 
     <EditText
+        android:id="@+id/register_username"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_background"
+        android:drawablePadding="8dp"
         android:hint="@string/username"
-        android:drawablePadding="8dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/register_username"/>
+        android:minHeight="48dp"
+        android:textColor="@color/colorText" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
-        android:hint="@string/password"
-        android:drawablePadding="8dp"
-        android:layout_height="wrap_content"
         android:id="@+id/register_password"
-        android:inputType="textPassword"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_background"
+        android:drawablePadding="8dp"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="@color/colorText"
+        android:autofillHints="" />
 
     <EditText
+        android:id="@+id/register_email"
         android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
-        android:hint="Email"
-        android:drawablePadding="8dp"
         android:layout_height="wrap_content"
-        android:id="@+id/register_email"/>
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_background"
+        android:drawablePadding="8dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColor="@color/colorText" />
 
     <Button
+        android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@android:color/white"
+        android:background="@color/colorAccent"
         android:text="@string/register"
-        android:id="@+id/register_button"
-        android:layout_gravity="left|center_vertical"/>
+        android:textColor="@color/colorTextLight"
+        tools:ignore="TextContrastCheck" />
 
 </LinearLayout>

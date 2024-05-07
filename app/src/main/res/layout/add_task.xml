@@ -1,44 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:measureWithLargestChild="false">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/colorBackground">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
         android:baselineAligned="false"
-        android:padding="2dp"
-        android:showDividers="beginning|middle|end">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/at_tv1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="start|center_vertical"
             android:text="@string/date_limit"
-            android:layout_gravity="left|center_vertical"
-            android:layout_margin="3dp"/>
+            android:textColor="@color/colorText" />
+
         <TextView
             android:id="@+id/at_date_limit"
+            android:layout_width="132dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_background"
+            android:gravity="center"
+            android:textColor="@color/colorText"
             android:textIsSelectable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|center_vertical"
-            android:layout_weight="0.4"
-            android:layout_margin="3dp"
-            android:background="#e2e8ff"
-            android:inputType="date"
-            android:gravity="center|center_vertical"/>
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <Button
             android:id="@+id/at_date_limit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
             android:text="@string/button_set"
-            android:layout_gravity="right|center_vertical"
-            />
+            android:textColor="@color/colorTextLight"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
@@ -47,19 +50,21 @@
         android:layout_height="wrap_content"
         android:text="Description"
         android:id="@+id/at_text"
-        android:layout_gravity="top"
         android:inputType="textMultiLine"
-        android:gravity="top"
-        android:layout_weight="0.7"
-        android:background="#e2e8ff"
-        android:layout_margin="3dp"
-        android:padding="3dp"/>
+        android:gravity="top|start"
+        android:layout_weight="1"
+        android:background="@drawable/edit_text_background"
+        android:padding="8dp"
+        android:textColor="@color/colorText"
+        android:layout_marginTop="8dp"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_save"
         android:id="@+id/at_save_button"
-        android:layout_gravity="left"
-        />
+        android:layout_gravity="end"
+        android:textColor="@color/colorTextLight"
+        android:background="@drawable/rounded_button"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>

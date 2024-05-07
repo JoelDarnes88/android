@@ -49,10 +49,10 @@
     <string name="default_amount_ratings">(0)</string>
     <string name="default_country">Country</string>
     <string name="location">Location</string>
-
     <string name="about_me">About me</string>
     <string name="default_about_me_description">(No description added)</string>
     <string name="my_services">My services</string>
+
     <string name="default_no_services">(No services offered)</string>
     <string name="service_title">Service title</string>
     <string name="service_description">Service description</string>
@@ -71,5 +71,4 @@
         <item>Paypal</item>
         <item>Google Pay</item>
     </string-array>
-
 </resources>
