@@ -53,6 +53,10 @@ public class Message implements Serializable {
         this.timestamp = timestamp;
     }
 
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
     public Long getSender() {
         return senderId;
     }

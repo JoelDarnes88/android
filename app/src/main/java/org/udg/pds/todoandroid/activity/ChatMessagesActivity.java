@@ -103,9 +103,16 @@ public class ChatMessagesActivity extends AppCompatActivity {
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 if (response.isSuccessful()) {
                     messages = response.body();
-                    adapter = new MessageAdapter(ChatMessagesActivity.this, messages);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.scrollToPosition(messages.size() - 1);
+                    if (adapter == null) {
+                        adapter = new MessageAdapter(ChatMessagesActivity.this, messages);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        int previousMessageCount = adapter.getItemCount();
+                        adapter.updateMessages(messages);
+                        if (messages.size() > previousMessageCount) {
+                            recyclerView.scrollToPosition(messages.size() - 1);
+                        }
+                    }
                 } else {
                     Toast.makeText(ChatMessagesActivity.this, "Fallada carregant missatges", Toast.LENGTH_SHORT).show();
                 }

@@ -11,5 +11,14 @@
         android:layout_height="wrap_content"
         android:background="@drawable/message_background_sent"
         android:padding="8dp"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/message_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="#888888"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="4dp"/>
 </LinearLayout>
