@@ -3,14 +3,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="10dp"
-    android:layout_margin="5dp">
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/message_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/message_received"
-    android:textAppearance="?attr/textAppearanceListItem"
-    android:padding="10dp" />
+        android:background="@drawable/message_background"
+        android:padding="8dp"
+        android:textColor="@android:color/black"/>
 </LinearLayout>
