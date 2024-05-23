@@ -17,6 +17,7 @@ import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.activity.ChatMessagesActivity;
 import org.udg.pds.todoandroid.entity.Chat;
 import org.udg.pds.todoandroid.entity.Message;
+import org.udg.pds.todoandroid.util.UserUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,13 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
 
     private final List<Chat> mChats;
     private Context mContext;
+    private final Long currentUserId;
 
     public ChatsAdapter(Context context, List<Chat> chats) {
         mContext = context;
         mChats = chats;
+        currentUserId = UserUtils.getCurrentUserId(context);
+
     }
 
     @Override
@@ -42,7 +46,9 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Chat chat = mChats.get(position);
-        holder.chatPartnerName.setText("Chat amb userId: " + chat.getUserTargetId());
+        Long chatPartnerId = chat.getUserTargetId().equals(currentUserId) ? chat.getUserId() : chat.getUserTargetId();
+        Long postId = chat.getPostId();
+        holder.chatPartnerName.setText("Chat amb userId: " + chatPartnerId + " --- postId: " + postId);
         Message lastMessage = chat.getMessages().get(chat.getMessages().size() - 1);
         holder.lastMessage.setText(lastMessage.getContent());
 

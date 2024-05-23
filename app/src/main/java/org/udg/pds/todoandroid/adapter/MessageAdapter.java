@@ -27,24 +27,26 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     @Override
+    public int getItemViewType(int position) {
+        Message message = mMessages.get(position);
+        if (message.getSenderId().equals(currentUserId)) {
+            return R.layout.message_item_sent;
+        } else {
+            return R.layout.message_item_received;
+        }
+    }
+
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.message_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Message message = mMessages.get(position);
-        //holder.messageTimestamp.setText(message.getTimestamp());
-        String messageDisplay = "Enviat per UserId" + message.getSenderId() + ": " + message.getContent();
+        String messageDisplay = "User" + message.getSenderId() + ": " + message.getContent();
         holder.messageContent.setText(messageDisplay);
-
-        if (message.getSenderId().equals(currentUserId)) {
-            holder.messageContent.setBackgroundResource(R.drawable.message_sent);
-        } else {
-            holder.messageContent.setBackgroundResource(R.drawable.message_received);
-        }
     }
 
     @Override
@@ -54,12 +56,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView messageContent;
-        //public final TextView messageTimestamp;
 
         public ViewHolder(View view) {
             super(view);
             messageContent = view.findViewById(R.id.message_content);
-            //messageTimestamp = view.findViewById(R.id.message_timestamp);
         }
     }
 

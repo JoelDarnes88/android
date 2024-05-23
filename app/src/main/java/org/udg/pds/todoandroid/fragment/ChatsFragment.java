@@ -45,6 +45,12 @@ public class ChatsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadChats();
+    }
+
     private void loadChats() {
         Call<List<Chat>> call = mTodoService.getMeusChats();
         call.enqueue(new Callback<List<Chat>>() {
