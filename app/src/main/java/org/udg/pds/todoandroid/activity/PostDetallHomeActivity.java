@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,10 +17,12 @@ import android.widget.Toast;
 import org.udg.pds.todoandroid.R;
 import org.udg.pds.todoandroid.TodoApp;
 import org.udg.pds.todoandroid.adapter.ImagesAdapter;
+import org.udg.pds.todoandroid.entity.Chat;
 import org.udg.pds.todoandroid.entity.Post;
 import org.udg.pds.todoandroid.entity.User;
 import org.udg.pds.todoandroid.fragment.HomePostsFragment;
 import org.udg.pds.todoandroid.rest.TodoApi;
+import org.udg.pds.todoandroid.util.UserUtils;
 
 import java.util.List;
 import java.util.Locale;
@@ -34,11 +38,16 @@ public class PostDetallHomeActivity extends AppCompatActivity {
     Long post_id;
     Boolean isFavourite = false;
 
+    Long userId;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detall_home);
         mApiService = ((TodoApp) this.getApplication()).getAPI();
+
+        userId = UserUtils.getCurrentUserId(this);
 
         this.crearHomePost();
         findViewById(R.id.favorite_icon).setOnClickListener(new View.OnClickListener() {
@@ -77,11 +86,18 @@ public class PostDetallHomeActivity extends AppCompatActivity {
         TextView userPropietari = findViewById(R.id.tvUserName);
         ViewPager2 viewPager = findViewById(R.id.post_item_image);
         ImageView favoriteIcon = findViewById(R.id.favorite_icon);
+        Button contactButton = findViewById(R.id.buttonContact);
 
         post_id = p.getId();
         isFavourite(post_id);
 
         User u = p.getUser();
+        if (u.getId().equals(userId)) {
+            contactButton.setVisibility(View.GONE);
+        } else {
+            contactButton.setVisibility(View.VISIBLE);
+            contactButton.setOnClickListener(v -> createOrOpenChat(userId, u.getId(), post_id));
+        }
 
         titol.setText(p.getTitol());
         descripcio.setText(p.getDescripcio());
@@ -140,4 +156,29 @@ public class PostDetallHomeActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void createOrOpenChat(Long userId, Long userTargetId, Long postId) {
+        Call<Chat> call = mApiService.createChat(userId, userTargetId, postId);
+        call.enqueue(new Callback<Chat>() {
+            @Override
+            public void onResponse(Call<Chat> call, Response<Chat> response) {
+                if (response.isSuccessful()) {
+                    Chat chat = response.body();
+                    Intent intent = new Intent(PostDetallHomeActivity.this, ChatMessagesActivity.class);
+                    intent.putExtra("CHAT_ID", chat.getId());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(PostDetallHomeActivity.this, "Error al crear o obtenir el chat", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Chat> call, Throwable t) {
+                Toast.makeText(PostDetallHomeActivity.this, "Error de xarxa", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }

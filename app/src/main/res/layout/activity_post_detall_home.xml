@@ -60,7 +60,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boto_chat" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonContact" />
 
     <Button
         android:id="@+id/boto_comprar"
@@ -71,15 +71,6 @@
         android:text="COMPRAR"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/divider" />
-
-    <Button
-        android:id="@+id/boto_fav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:text="FAV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/boto_chat" />
 
     <TextView
         android:id="@+id/tvPrice"
@@ -115,13 +106,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
-        android:id="@+id/boto_chat"
+        android:id="@+id/buttonContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
         android:text="CONTACTAR"
-        app:layout_constraintEnd_toStartOf="@+id/boto_fav"
-        app:layout_constraintStart_toEndOf="@+id/boto_comprar"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/boto_comprar" />
 
 
