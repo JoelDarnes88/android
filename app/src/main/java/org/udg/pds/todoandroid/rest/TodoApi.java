@@ -117,6 +117,10 @@ public interface TodoApi {
     @POST("chats/{chatId}/send")
     Call<Message> sendMessage(@Path("chatId") Long chatId, @Query("senderId") Long senderId, @Query("content") String content);
 
+    @POST("chats/create")
+    Call<Chat> createChat(@Query("userId") Long userId, @Query("userTargetId") Long userTargetId, @Query("postId") Long postId);
 
+    @DELETE("/chats/delete/{chatId}")
+    Call<Void> deleteChat(@Path("chatId") Long chatId);
 }
 

@@ -38,6 +38,8 @@ public class ChatMessagesActivity extends AppCompatActivity {
     private Handler handler;
     private Runnable updateRunnable;
     private static final int UPDATE_INTERVAL = 1000;
+    private boolean writtenMessage = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +115,6 @@ public class ChatMessagesActivity extends AppCompatActivity {
                             recyclerView.scrollToPosition(messages.size() - 1);
                         }
                     }
-                } else {
-                    Toast.makeText(ChatMessagesActivity.this, "Fallada carregant missatges", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -141,6 +141,8 @@ public class ChatMessagesActivity extends AppCompatActivity {
                     adapter.notifyItemInserted(messages.size() - 1);
                     recyclerView.scrollToPosition(messages.size() - 1);
                     editMessage.setText("");
+                    writtenMessage = true;
+
                 } else {
                     Toast.makeText(ChatMessagesActivity.this, "Error enviant missatge", Toast.LENGTH_SHORT).show();
                 }
@@ -157,4 +159,30 @@ public class ChatMessagesActivity extends AppCompatActivity {
         setResult(RESULT_OK);
         super.finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (!writtenMessage && messages.isEmpty() && chatId != -1) {
+            deleteEmptyChat(chatId);
+        }
+        super.onBackPressed();
+    }
+
+    private void deleteEmptyChat(Long chatId) {
+        Call<Void> call = mTodoService.deleteChat(chatId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(ChatMessagesActivity.this, "Error eliminant chat", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(ChatMessagesActivity.this, "Error de xarxa", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

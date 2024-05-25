@@ -49,8 +49,13 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
         Long chatPartnerId = chat.getUserTargetId().equals(currentUserId) ? chat.getUserId() : chat.getUserTargetId();
         Long postId = chat.getPostId();
         holder.chatPartnerName.setText("Chat amb userId: " + chatPartnerId + " --- postId: " + postId);
-        Message lastMessage = chat.getMessages().get(chat.getMessages().size() - 1);
-        holder.lastMessage.setText(lastMessage.getContent());
+
+        if (chat.getMessages() != null && !chat.getMessages().isEmpty()) {
+            Message lastMessage = chat.getMessages().get(chat.getMessages().size() - 1);
+            holder.lastMessage.setText(lastMessage.getContent());
+        } else {
+            holder.lastMessage.setText("Sense missatges"); //mai passara
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
